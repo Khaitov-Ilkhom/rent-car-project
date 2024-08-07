@@ -9,6 +9,7 @@ const SignIn = () => {
   const [signIn, {data, isSuccess, isLoading}] = useSingInMutation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log("login", data)
 
   const onFinish = (values) => {
     console.log('Success:', values);

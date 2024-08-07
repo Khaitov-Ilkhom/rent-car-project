@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 const VerifyOtp = () => {
   const [verifyOtp, {data, isSuccess, isLoading}] = useVerifyOtpMutation()
   const navigate = useNavigate();
+  console.log("VerifyOtp", data);
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -65,7 +66,7 @@ const VerifyOtp = () => {
                 },
               ]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
 
           <Form.Item className='w-full'>

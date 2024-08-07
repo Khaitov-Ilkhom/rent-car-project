@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import {Button, Checkbox, Form, Input} from 'antd';
 import {ContentTitle} from "../../../utils/Index.jsx";
 import {useSingUpMutation} from "../../../redux/api/auth-api.jsx";
 import {useEffect} from "react";
@@ -10,6 +10,7 @@ const SignUp = () => {
   const [signUp, {data, isSuccess, isLoading}] = useSingUpMutation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log("register", data)
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -56,7 +57,7 @@ const SignUp = () => {
                 },
               ]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
 
           <Form.Item
@@ -69,7 +70,7 @@ const SignUp = () => {
                 },
               ]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
 
           <Form.Item
@@ -82,7 +83,7 @@ const SignUp = () => {
                 },
               ]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
 
           <Form.Item
@@ -95,7 +96,7 @@ const SignUp = () => {
                 },
               ]}
           >
-            <Input type="email" />
+            <Input type="email"/>
           </Form.Item>
 
           <Form.Item
@@ -108,7 +109,7 @@ const SignUp = () => {
                 },
               ]}
           >
-            <Input.Password type="password" />
+            <Input.Password type="password"/>
           </Form.Item>
 
           <Form.Item
