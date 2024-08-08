@@ -1,80 +1,40 @@
 import {useEffect} from 'react'
-import {ContentTitle} from "../../../utils/Index.jsx";
-import {Button, Form, Input} from "antd";
+import {Input, Typography} from "antd";
 import {useVerifyOtpMutation} from "../../../redux/api/auth-api.jsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+
+const {Text, Title} = Typography;
 
 const VerifyOtp = () => {
-  const [verifyOtp, {data, isSuccess, isLoading}] = useVerifyOtpMutation()
-  const navigate = useNavigate();
-  console.log("VerifyOtp", data);
+  const navigate = useNavigate()
+  const [verifyOtp, {data, isSuccess, isLoading, isError}] = useVerifyOtpMutation()
+  console.log(data)
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    verifyOtp(values)
+  const onChange = (text) => {
+    verifyOtp(text)
   };
-
   useEffect(() => {
-    if (isSuccess) {
-      navigate("/auth/signin")
+    if(isSuccess){
+      navigate('/auth/signin')
     }
-  }, [isSuccess]);
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+  },[isSuccess])
+  useEffect(() => {
+    if(isError){
+      navigate('/auth')
+    }
+  },[isError])
+  const sharedProps = {
+    onChange,
   };
   return (
       <div className="w-full m-auto flex justify-center items-center flex-col">
-        <ContentTitle>Verify Otp</ContentTitle>
-        <Form
-            className="w-full"
-            name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            style={{
-              maxWidth: 450,
-            }}
-            initialValues={{
-              remember: true,
-            }}
-            layout="vertical"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-        >
-          <Form.Item
-              label="Email"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your email!',
-                },
-              ]}
-          >
-            <Input type="email"/>
-          </Form.Item>
-
-          <Form.Item
-              label="Verify OTP"
-              name="verify-otp"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your verify otp!',
-                },
-              ]}
-          >
-            <Input/>
-          </Form.Item>
-
-          <Form.Item className='w-full'>
-            <Button loading={isLoading} disabled={isLoading} className="w-full" type="primary" htmlType="submit">
-              Verify OTP
-            </Button>
-          </Form.Item>
-        </Form>
+        <div className='flex flex-col items-center  leading-none'>
+          <Link to={'/auth'}><Title className="pb-2">Verification</Title></Link>
+          <Text className="pb-3 leading-none mb-3">Enter the code sent to your email</Text>
+        </div>
+        <div>
+          <Input.OTP length={6} {...sharedProps} />
+        </div>
       </div>
   )
 }

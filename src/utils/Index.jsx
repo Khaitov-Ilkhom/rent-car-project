@@ -20,8 +20,8 @@ const SuspenseElement = ({children}) => {
   )
 }
 
-const ContentTitle = ({children}) => {
-  return <Title level={3}>{children}</Title>
+const ContentTitle = ({children, ...props}) => {
+  return <Title level={3} {...props}>{children}</Title>
 }
 
 

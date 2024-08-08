@@ -1,9 +1,13 @@
-import React, {useEffect} from 'react'
-import {ContentTitle} from "../../../utils/Index.jsx";
-import {Button, Checkbox, Form, Input} from "antd";
+import {useEffect} from 'react'
+import {Button, Form, Input, Typography} from "antd";
 import {useSingInMutation} from "../../../redux/api/auth-api.jsx";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {MdAlternateEmail} from "react-icons/md";
+import {RiLockPasswordLine} from "react-icons/ri";
+
+const {Text, Title} = Typography;
+
 
 const SignIn = () => {
   const [signIn, {data, isSuccess, isLoading}] = useSingInMutation()
@@ -27,7 +31,7 @@ const SignIn = () => {
   };
   return (
       <div className="w-full m-auto flex justify-center items-center flex-col">
-        <ContentTitle>Sign In</ContentTitle>
+        <Title>Sign In</Title>
         <Form
             className="w-full"
             name="basic"
@@ -46,7 +50,6 @@ const SignIn = () => {
             autoComplete="off"
         >
           <Form.Item
-              label="Email"
               name="email"
               rules={[
                 {
@@ -55,11 +58,13 @@ const SignIn = () => {
                 },
               ]}
           >
-            <Input type="email"/>
+            <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
+                   prefix={<MdAlternateEmail className='text-gray-400 text-[22px] mx-2'/>} type="email"
+                   placeholder="Email Address"/>
           </Form.Item>
 
           <Form.Item
-              label="Password"
+              className="pb-2"
               name="password"
               rules={[
                 {
@@ -68,25 +73,20 @@ const SignIn = () => {
                 },
               ]}
           >
-            <Input.Password type="password"/>
-          </Form.Item>
-
-          <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{
-                span: 16,
-              }}
-          >
-            <Checkbox>Remember me</Checkbox>
+            <Input.Password style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
+                            prefix={<RiLockPasswordLine className='text-gray-400 text-[22px] mx-2'/>} type="password"
+                            placeholder="Password"/>
           </Form.Item>
 
           <Form.Item className='w-full'>
-            <Button loading={isLoading} disabled={isLoading} className="w-full" type="primary" htmlType="submit">
+            <Button loading={isLoading} disabled={isLoading}
+                    className="w-full py-6 bg-[#56b0bb] border-[#56b0bb] text-white text-xl font-semibold leading-3 hover:!bg-[#499CA6] hover:!text-white hover:!border-[#499ca6]"
+                    htmlType="submit">
               Sign In
             </Button>
           </Form.Item>
         </Form>
+        <Text>Dont you have account? <Link className="!text-[#499CA6]" to="/auth">Sign Up</Link></Text>
       </div>
   )
 }

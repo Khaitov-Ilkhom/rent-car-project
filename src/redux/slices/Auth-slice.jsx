@@ -19,6 +19,7 @@ const authSlice = createSlice({
     },
     signUp: (state, action) => {
       state.user = action.payload;
+      localStorage.setItem("user", action.payload);
     }
   }
 })
