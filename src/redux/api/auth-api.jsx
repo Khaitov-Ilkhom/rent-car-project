@@ -2,23 +2,23 @@ import {api} from './Index.jsx';
 
 const authApi = api.injectEndpoints({
   endpoints: (build) => ({
-    singIn: build.mutation({
+    signIn: build.mutation({
       query: (body) => ({
-        url: '/auth/login',
+        url: '/auth/signin',
         method: 'POST',
         body
       })
     }),
-    singUp: build.mutation({
+    signUp: build.mutation({
       query: (body) => ({
-        url: '/auth/register',
+        url: '/auth/signup',
         method: 'POST',
         body
       })
     }),
     verifyOtp: build.mutation({
       query: (body) => ({
-        url: '/auth/verify-otp',
+        url: '/auth/otp-verify',
         method: 'POST',
         body
       })
@@ -26,4 +26,4 @@ const authApi = api.injectEndpoints({
   })
 })
 
-export const {useSingInMutation, useSingUpMutation, useVerifyOtpMutation} = authApi
+export const {useSignInMutation, useSignUpMutation, useVerifyOtpMutation} = authApi

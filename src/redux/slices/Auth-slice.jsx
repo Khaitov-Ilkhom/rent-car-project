@@ -13,9 +13,12 @@ const authSlice = createSlice({
       state.token = null
       localStorage.removeItem("token");
     },
-    singIn: (state, action) => {
-      state.token = action.payload;
-      localStorage.setItem("token", action.payload);
+    signIn: (state, action) => {
+      const user = JSON.parse(atob(action.payload.token.split('.')[1]));
+      state.user = user
+      state.token = action.payload.token;
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(user));
     },
     signUp: (state, action) => {
       state.user = action.payload;
@@ -25,4 +28,4 @@ const authSlice = createSlice({
 })
 
 export const {reducer} = authSlice;
-export const {logOut, singIn, signUp} = authSlice.actions;
+export const {logOut, signIn, signUp} = authSlice.actions;

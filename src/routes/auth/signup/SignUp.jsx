@@ -1,49 +1,39 @@
-import {Button, Form, Input, Typography} from 'antd';
-import {useSingUpMutation} from "../../../redux/api/auth-api.jsx";
-import {useEffect} from "react";
+import {Button, Form, Input, InputNumber, message, Typography} from 'antd';
+import {useSignUpMutation} from "../../../redux/api/auth-api.jsx";
+import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {MdAlternateEmail} from "react-icons/md";
 import {RiLockPasswordLine} from "react-icons/ri";
 import { SlUser } from "react-icons/sl";
+import {
+  capitalPasswordValidation,
+  numberPasswordValidation,
+  symbolPasswordValidation
+} from "../../../utils/VerifyPassword.js";
 
 const {Text, Title} = Typography;
 
 const SignUp = () => {
-  const [signUp, {data, isSuccess, isLoading}] = useSingUpMutation()
-  const dispatch = useDispatch();
+  const [signUp, {data, isSuccess, isLoading}] = useSignUpMutation()
   const navigate = useNavigate();
-
-  const capitalPasswordValidation = {
-    pattern: /(?=.*[A-Z])/,
-    message: "Password must contain at least one capital letter"
-  }
-  const symbolPasswordValidation = {
-    pattern: /(?=.*[!@#$%^&*()_+\-=[\]{}:';"\\|,.<>\/?])/,
-    message: "Password must contain at least one symbol"
-  }
-  const numberPasswordValidation = {
-    pattern: /(?=.*\d)/,
-    message: "Password must contain at least one number"
-  }
-
-  console.log("register", data)
+  const [email, setEmail] = useState('');
 
   const onFinish = (values) => {
     console.log('Success:', values);
     signUp(values)
+    setEmail(values.email)
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      // dispatch(signUp(data))
-      navigate("/auth/verify-otp")
+    if (data) {
+      if (data?.statusCode && data?.statusCode === 201) {
+        message.success(data?.message)
+        navigate(`/auth/verify-otp?email=${btoa(email)}`)
+      } else {
+        message.error(data?.message)
+      }
     }
-  }, [isSuccess]);
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
+  }, [data]);
   return (
       <div className="w-full m-auto flex justify-center items-center flex-col">
         <Title>Sign Up</Title>
@@ -61,49 +51,50 @@ const SignUp = () => {
             }}
             layout="vertical"
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+            autoComplete="on"
         >
-          <Form.Item
-              name="first_name"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your firstname!',
-                },
-              ]}
-          >
-            <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "6px 14px 6px 6px", color: "#56b0bb"}}
-                   prefix={<SlUser className='text-gray-400 text-[20px] mx-2'/>}
-                   placeholder="Firstname"/>
-          </Form.Item>
+         <div className="flex items-center gap-3">
+           <Form.Item
+               name="firstName"
+               rules={[
+                 {
+                   required: true,
+                   message: 'Please input your firstname!',
+                 },
+               ]}
+           >
+             <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
+                    prefix={<SlUser className='text-gray-400 text-[20px] mx-2'/>}
+                    placeholder="Firstname" autoComplete="firstname"/>
+           </Form.Item>
+
+           <Form.Item
+               name="lastName"
+               rules={[
+                 {
+                   required: true,
+                   message: 'Please input your lastname!',
+                 },
+               ]}
+           >
+             <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
+                    prefix={<SlUser className='text-gray-400 text-[20px] mx-2'/>}
+                    placeholder="Lastname" autoComplete="lastname"/>
+           </Form.Item>
+         </div>
 
           <Form.Item
-              name="last_name"
+              name="age"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your lastname!',
+                  message: 'Please input your age!',
                 },
               ]}
           >
-            <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "6px 14px 6px 6px", color: "#56b0bb"}}
+            <InputNumber style={{width: "100%", fontSize: "16px", border: "1px solid #9BA3AF", padding: "6px 14px 6px 6px", color: "#56b0bb !important"}}
                    prefix={<SlUser className='text-gray-400 text-[20px] mx-2'/>}
-                   placeholder="Lastname"/>
-          </Form.Item>
-
-          <Form.Item
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your username!',
-                },
-              ]}
-          >
-            <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "6px 14px 6px 6px", color: "#56b0bb"}}
-                   prefix={<SlUser className='text-gray-400 text-[20px] mx-2'/>}
-                   placeholder="Username"/>
+                   placeholder="Age" autoComplete="age"/>
           </Form.Item>
 
           <Form.Item
@@ -115,17 +106,17 @@ const SignUp = () => {
                 },
               ]}
           >
-            <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "6px 14px 6px 6px", color: "#56b0bb"}}
+            <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
                    prefix={<MdAlternateEmail className='text-gray-400 text-[20px] mx-2'/>} type="email"
-                   placeholder="Email Address"/>
+                   placeholder="Email Address" autoComplete="email"/>
           </Form.Item>
 
           <Form.Item
               name="password"
               rules={[
                 {
-                  min: 8,
-                  message: "Password must be at least 8 characters!",
+                  max: 6,
+                  message: "Password must be at most 6 characters!",
                 },
                 {
                   required: true,
@@ -136,9 +127,9 @@ const SignUp = () => {
                   numberPasswordValidation,
               ]}
           >
-            <Input.Password style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "6px 14px 6px 6px", color: "#56b0bb"}}
+            <Input.Password style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
                             prefix={<RiLockPasswordLine className='text-gray-400 text-[20px] mx-2'/>} type="password"
-                            placeholder="Password"/>
+                            placeholder="Password" autoComplete="password"/>
           </Form.Item>
 
           <Form.Item className='w-full'>

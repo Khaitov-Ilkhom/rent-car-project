@@ -1,34 +1,37 @@
 import {useEffect} from 'react'
-import {Button, Form, Input, Typography} from "antd";
-import {useSingInMutation} from "../../../redux/api/auth-api.jsx";
+import {Button, Form, Input, message, Typography} from "antd";
+import {useSignInMutation} from "../../../redux/api/auth-api.jsx";
 import {useDispatch} from "react-redux";
+import {signIn as saveToken} from "../../../redux/slices/Auth-slice.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {MdAlternateEmail} from "react-icons/md";
 import {RiLockPasswordLine} from "react-icons/ri";
+import {capitalPasswordValidation, numberPasswordValidation, symbolPasswordValidation} from "../../../utils/VerifyPassword.js";
 
 const {Text, Title} = Typography;
 
 
 const SignIn = () => {
-  const [signIn, {data, isSuccess, isLoading}] = useSingInMutation()
+  const [signIn, {data, isSuccess, isLoading}] = useSignInMutation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("login", data)
 
   const onFinish = (values) => {
-    console.log('Success:', values);
     signIn(values)
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      // dispatch(signIn(data))
-      navigate("/")
+    if (data) {
+      if (data?.accessToken) {
+        message.success("Sign in Successfully")
+        navigate("/")
+        dispatch(saveToken({token: data.accessToken}))
+      } else {
+        message.error(data?.message)
+      }
     }
-  }, [isSuccess]);
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+  }, [data]);
+
   return (
       <div className="w-full m-auto flex justify-center items-center flex-col">
         <Title>Sign In</Title>
@@ -46,8 +49,7 @@ const SignIn = () => {
             }}
             layout="vertical"
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+            autoComplete="on"
         >
           <Form.Item
               name="email"
@@ -60,7 +62,7 @@ const SignIn = () => {
           >
             <Input style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
                    prefix={<MdAlternateEmail className='text-gray-400 text-[22px] mx-2'/>} type="email"
-                   placeholder="Email Address"/>
+                   placeholder="Email Address" autoComplete="email"/>
           </Form.Item>
 
           <Form.Item
@@ -68,14 +70,21 @@ const SignIn = () => {
               name="password"
               rules={[
                 {
+                  max: 6,
+                  message: "Password must be at most 6 characters!",
+                },
+                {
                   required: true,
                   message: 'Please input your password!',
                 },
+                symbolPasswordValidation,
+                capitalPasswordValidation,
+                numberPasswordValidation,
               ]}
           >
             <Input.Password style={{fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb"}}
                             prefix={<RiLockPasswordLine className='text-gray-400 text-[22px] mx-2'/>} type="password"
-                            placeholder="Password"/>
+                            placeholder="Password" autoComplete="password"/>
           </Form.Item>
 
           <Form.Item className='w-full'>
