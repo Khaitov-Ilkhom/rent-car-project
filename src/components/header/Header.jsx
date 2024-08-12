@@ -30,14 +30,14 @@ const Header = () => {
                 </form>
               </div>
               <div className="flex items-center gap-3">
-                <Link to={"/"}>
+                <Link to={"/dashboard/liked"}>
                   <Badge size="large" count={5}>
                     <div className="p-2 bg-white border border-gray-200 rounded-full">
                       <AiFillHeart className="text-[#596780] text-2xl"/>
                     </div>
                   </Badge>
                 </Link>
-                <Link to={"/"}>
+                <Link to={"/dashboard/notification"}>
                   <Badge count={5}>
                     <div className="p-2 bg-white border border-gray-200 rounded-full">
                       <IoIosNotifications className="text-[#596780] text-2xl"/>
