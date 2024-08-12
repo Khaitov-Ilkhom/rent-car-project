@@ -55,7 +55,7 @@ const RenderCard = ({car}) => {
             <span className="text-sm font-bold text-[#90a3bf]">day</span>
           </div>
           <Link
-              to={"/category/details"}
+              to={"/"}
               className="mt-2 flex max-w-max rounded bg-blue-600 px-5 py-[10px] text-center text-base font-semibold leading-normal text-white"
           >
             Rent Now
