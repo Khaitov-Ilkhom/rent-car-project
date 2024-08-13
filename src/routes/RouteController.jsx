@@ -16,6 +16,8 @@ const Notification = lazy(() => import("./dashboard/notification/Notification.js
 const Profile = lazy(() => import("./dashboard/profile/Profile.jsx"));
 const Setting = lazy(() => import("./dashboard/setting/Setting.jsx"));
 
+const Categories = lazy(() => import("./categories/Categories.jsx"));
+
 const RouteController = () => {
   return useRoutes([
     {
@@ -69,6 +71,10 @@ const RouteController = () => {
           element: <Suspense><Setting/></Suspense>,
         }
       ]
+    },
+    {
+      path: "categories",
+      element: <Suspense><Categories/></Suspense>,
     }
   ])
 }

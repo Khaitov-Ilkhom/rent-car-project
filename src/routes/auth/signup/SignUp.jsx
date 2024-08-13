@@ -2,7 +2,7 @@ import {Button, Form, Input, InputNumber, message, Typography} from 'antd';
 import {useSignUpMutation} from "../../../redux/api/auth-api.jsx";
 import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {MdAlternateEmail} from "react-icons/md";
+import {MdAlternateEmail, MdPhone} from "react-icons/md";
 import {RiLockPasswordLine} from "react-icons/ri";
 import { SlUser } from "react-icons/sl";
 import {
@@ -55,7 +55,7 @@ const SignUp = () => {
         >
          <div className="flex items-center gap-3">
            <Form.Item
-               name="firstName"
+               name="first_name"
                rules={[
                  {
                    required: true,
@@ -69,7 +69,7 @@ const SignUp = () => {
            </Form.Item>
 
            <Form.Item
-               name="lastName"
+               name="last_name"
                rules={[
                  {
                    required: true,
@@ -84,17 +84,17 @@ const SignUp = () => {
          </div>
 
           <Form.Item
-              name="age"
+              name="phone_number"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your age!',
+                  message: 'Please input your phone number!',
                 },
               ]}
           >
-            <InputNumber style={{width: "100%", fontSize: "16px", border: "1px solid #9BA3AF", padding: "6px 14px 6px 6px", color: "#56b0bb !important"}}
-                   prefix={<SlUser className='text-gray-400 text-[20px] mx-2'/>}
-                   placeholder="Age" autoComplete="age"/>
+            <Input style={{width: "100%", fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb !important"}}
+                   prefix={<MdPhone className='text-gray-400 text-[20px] mx-2'/>}
+                   placeholder="+998 12 345 67 89" autoComplete="phone_number"/>
           </Form.Item>
 
           <Form.Item

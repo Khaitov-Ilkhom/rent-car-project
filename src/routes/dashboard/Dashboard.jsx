@@ -1,5 +1,5 @@
 import {Layout} from "antd";
-import Sidebar from "../../components/sidebar/Sidebar.jsx";
+import Sidebar from "../../components/dashboard-sidebar/Sidebar.jsx";
 import {useState} from "react";
 import SidebarHeader from "../../components/sidebar-header/SidebarHeader.jsx";
 import {Outlet} from "react-router-dom";

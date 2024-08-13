@@ -1,8 +1,14 @@
-import React from 'react'
 
 const CarRent = () => {
   return (
-      <div>CarRent</div>
+      <div>
+        <div>
+          <div>Rent Car</div>
+          <div>
+
+          </div>
+        </div>
+      </div>
   )
 }
 export default CarRent

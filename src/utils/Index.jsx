@@ -24,5 +24,13 @@ const ContentTitle = ({children, ...props}) => {
   return <Title level={3} {...props}>{children}</Title>
 }
 
+export const Container = ({children}) => {
+  return (
+      <div className='main-container'>
+        {children}
+      </div>
+  )
+}
+
 
 export {Loading, SuspenseElement, ContentTitle}
