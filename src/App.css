@@ -85,3 +85,16 @@
   padding: 0 20px;
   width: 100%;
 }
+
+.ant-upload-select {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.ant-upload-list-item-container {
+  width: 80px !important;
+  height: 80px !important;
+}
+.ant-color-picker-trigger {
+  justify-content: flex-start;
+}

@@ -4,14 +4,14 @@ const authApi = api.injectEndpoints({
   endpoints: (build) => ({
     signIn: build.mutation({
       query: (body) => ({
-        url: '/auth/signin',
+        url: '/auth/sign-in',
         method: 'POST',
         body
       })
     }),
     signUp: build.mutation({
       query: (body) => ({
-        url: '/auth/signup',
+        url: '/auth/sign-up',
         method: 'POST',
         body
       })

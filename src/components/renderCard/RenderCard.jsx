@@ -31,7 +31,7 @@ const CarCard = ({car}) => {
         <span className="flex items-center gap-1">
           <CarCardGasoline/>
           <span className="text-sm font-medium text-[#90a3bf]">
-            40L
+             {car.capacity_fuel}L
           </span>
         </span>
           <span className="flex items-center gap-1">

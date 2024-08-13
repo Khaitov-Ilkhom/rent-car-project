@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery} from "../../redux/api/categories.jsx";
+import { useGetCategoriesQuery } from "../../redux/api/categories.jsx";
 import { Container, Loading } from "../../utils/Index.jsx";
 import { Link } from "react-router-dom";
 
@@ -12,10 +12,10 @@ const Categories = () => {
           {isLoading ? (
               <Loading />
           ) : (
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-8">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
                 {data?.payload.map((category) => (
-                    <Link to={`/categories?categoryId=${category._id}`} key={category._id} className="flex flex-col items-center gap-4">
-                      <div className="rounded-full overflow-hidden p-3 w-[150px] h-[150px] bg-white shadow-lg transition hover:shadow-2xl">
+                    <Link to={`/categories?categories=${category._id}`} key={category._id} className="flex flex-col items-center gap-4">
+                      <div className="rounded-full border border-slate-400 overflow-hidden p-1 w-[150px] h-[150px] bg-white shadow-lg transition hover:shadow-xl">
                         <img src={category.image} className="rounded-full object-contain select-none" alt="" />
                       </div>
                       <p className="text-center font-bold">{category.name}</p>

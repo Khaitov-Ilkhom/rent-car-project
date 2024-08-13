@@ -11,9 +11,10 @@ const {Sider} = Layout;
 
 const Sidebar = ({collapsed}) => {
   return (
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null}  collapsible collapsed={collapsed}>
         <Menu
-            theme="dark"
+            selectable={false}
+            className="bg-white min-h-screen "
             mode="inline"
             items={[
               {
@@ -24,7 +25,7 @@ const Sidebar = ({collapsed}) => {
               {
                 key: '2',
                 icon: <IoPersonSharp size={22}/>,
-                label: <NavLink to="/dashboard">Profile</NavLink>,
+                label: <NavLink to="/dashboard/profile">Profile</NavLink>,
               },
               {
                 key: '3',

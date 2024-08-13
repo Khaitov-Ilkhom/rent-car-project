@@ -18,33 +18,29 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
 
+  console.log(data)
+
   const onFinish = (values) => {
-    console.log('Success:', values);
     signUp(values)
     setEmail(values.email)
   };
 
   useEffect(() => {
-    if (data) {
-      if (data?.statusCode && data?.statusCode === 201) {
-        message.success(data?.message)
-        navigate(`/auth/verify-otp?email=${btoa(email)}`)
-      } else {
-        message.error(data?.message)
+      if (isSuccess) {
+        message.success(data.message)
+        // navigate(`/auth/verify-otp?email=${btoa(email)}`)
+        navigate(`/auth/signin`)
       }
-    }
-  }, [data]);
+  }, [isSuccess]);
+
   return (
       <div className="w-full m-auto flex justify-center items-center flex-col">
         <Title>Sign Up</Title>
         <Form
-            className="w-full"
+            className="w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px]"
             name="basic"
             labelCol={{
               span: 8,
-            }}
-            style={{
-              maxWidth: 450,
             }}
             initialValues={{
               remember: true,
@@ -84,20 +80,6 @@ const SignUp = () => {
          </div>
 
           <Form.Item
-              name="phone_number"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your phone number!',
-                },
-              ]}
-          >
-            <Input style={{width: "100%", fontSize: "16px", border: "1px solid #9BA3AF", padding: "8px 14px 8px 6px", color: "#56b0bb !important"}}
-                   prefix={<MdPhone className='text-gray-400 text-[20px] mx-2'/>}
-                   placeholder="+998 12 345 67 89" autoComplete="phone_number"/>
-          </Form.Item>
-
-          <Form.Item
               name="email"
               rules={[
                 {
@@ -115,8 +97,8 @@ const SignUp = () => {
               name="password"
               rules={[
                 {
-                  max: 6,
-                  message: "Password must be at most 6 characters!",
+                  min: 8,
+                  message: "Password must be at most 8 characters!",
                 },
                 {
                   required: true,

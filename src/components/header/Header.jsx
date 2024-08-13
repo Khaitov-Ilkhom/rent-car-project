@@ -1,14 +1,40 @@
-import {BiLogInCircle} from "react-icons/bi";
-import {IoIosNotifications} from "react-icons/io";
-import {AiFillHeart} from "react-icons/ai";
 import { LuSettings2 } from "react-icons/lu";
-import {AutoComplete, Avatar, Badge} from "antd";
+import {IoIosNotifications} from "react-icons/io";
+import {IoLogInOutline, IoLogOutOutline} from "react-icons/io5";
+import { SlUser } from "react-icons/sl";
+import {AiFillHeart} from "react-icons/ai";
+import {AutoComplete, Avatar, Badge, Dropdown, Space} from "antd";
 import {BiSearch} from "react-icons/bi";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png"
 
+
 const Header = () => {
   const navigate = useNavigate();
+
+  const items = [
+    {
+      label: <div onClick={() => navigate("/dashboard")} className="bg-transparent flex items-center gap-2 text-[#596780]">
+        <span>Profile</span>
+        <SlUser/>
+      </div>,
+      key: '0',
+    },
+    {
+      label: <div onClick={() => navigate("/auth/signin")} className="bg-transparent flex items-center gap-2 text-[#596780]">
+        <span>Sign in</span>
+        <IoLogInOutline/>
+      </div>,
+      key: '1',
+    },
+    {
+      label: <div className="bg-transparent flex items-center gap-2 text-[#596780]">
+        <span>Log Out</span>
+        <IoLogOutOutline/>
+      </div>,
+      key: '2',
+    }
+  ];
 
   return (
       <>
@@ -44,15 +70,23 @@ const Header = () => {
                     </div>
                   </Badge>
                 </Link>
-                <div onClick={() => navigate("/auth/signin")} className="p-2 bg-white border border-gray-200 rounded-full mb-2">
-                  <BiLogInCircle className="text-[#596780] text-2xl"/>
-                </div>
-                <div className="pb-2 flex justify-center items-center">
-                  <Avatar onClick={() => navigate("/dashboard")}
-                      className="w-[44px] h-[44px] bg-slate-900  border border-gray-200 rounded-full"
-                      src="https://static.vecteezy.com/system/resources/thumbnails/027/951/137/small_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png"
-                  />
-                </div>
+                <Dropdown
+                    menu={{
+                      items,
+                    }}
+                    trigger={['click']}
+                >
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <div className="pb-2 flex justify-center items-center hover:scale-105 transition duration-700">
+                        <Avatar
+                            className="w-[44px] h-[44px] bg-slate-900  border border-gray-200 rounded-full"
+                            src="https://static.vecteezy.com/system/resources/thumbnails/027/951/137/small_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png"
+                        />
+                      </div>
+                    </Space>
+                  </a>
+                </Dropdown>
               </div>
             </div>
           </div>

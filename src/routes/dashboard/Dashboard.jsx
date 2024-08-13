@@ -7,14 +7,16 @@ import {Outlet} from "react-router-dom";
 const {Content} = Layout;
 
 const Dashboard = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false)
 
   return (
       <Layout className="h-screen">
-        <Sidebar collapsed={collapsed}/>
-        <Layout>
+        <div>
+          <Sidebar collapsed={collapsed}/>
+        </div>
+        <Layout className="min-h-screen">
           <SidebarHeader collapsed={collapsed} setCollapsed={setCollapsed}/>
-          <Content className="bg-white rounded-2xl shadow-xl p-6 my-6 mx-4 min-h-[280px]">
+          <Content className="bg-white rounded-xl shadow-xl p-4 m-4 h-screen ">
             <Outlet/>
           </Content>
         </Layout>

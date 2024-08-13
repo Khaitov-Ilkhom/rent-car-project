@@ -22,27 +22,22 @@ const SignIn = () => {
 
   useEffect(() => {
     if (data) {
-      if (data?.accessToken) {
-        message.success("Sign in Successfully")
+      if (isSuccess) {
+        message.success(data.message)
         navigate("/")
-        dispatch(saveToken({token: data.accessToken}))
-      } else {
-        message.error(data?.message)
+        dispatch(saveToken({token: data?.payload?.accessToken}))
       }
     }
-  }, [data]);
+  }, [isSuccess]);
 
   return (
       <div className="w-full m-auto flex justify-center items-center flex-col">
         <Title>Sign In</Title>
         <Form
-            className="w-full"
+            className="w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px]"
             name="basic"
             labelCol={{
               span: 8,
-            }}
-            style={{
-              maxWidth: 450,
             }}
             initialValues={{
               remember: true,
@@ -70,8 +65,8 @@ const SignIn = () => {
               name="password"
               rules={[
                 {
-                  max: 6,
-                  message: "Password must be at most 6 characters!",
+                  min: 8,
+                  message: "Password must be at most 8 characters!",
                 },
                 {
                   required: true,
