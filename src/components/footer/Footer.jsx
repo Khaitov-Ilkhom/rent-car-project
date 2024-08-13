@@ -56,14 +56,14 @@ const Footer = () => {
             </div>
 
             <div className="flex w-full items-center justify-between pt-9">
-            <span className="text-base font-semibold text-[#1a202c]">
-                ©2024 MORENT. All rights reserved
+            <span className="text-base  text-slate-400">
+                ©2024 Rent Car. All rights reserved
             </span>
               <div className="flex items-center gap-14">
-                <span className="text-base font-semibold text-[#1a202c]">
+                <span className="text-base  text-slate-400">
                 Privacy & Policy
                 </span>
-                <span className="text-base font-semibold text-[#1a202c]">
+                <span className="text-base  text-slate-400">
                 Terms & Condition
                 </span>
               </div>
