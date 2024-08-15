@@ -21,7 +21,7 @@ const CarCard = ({car}) => {
 
         <div className="flex h-[190px] w-full items-center justify-center">
           <img
-              className="object-contain"
+              className="object-contain mix-blend-multiply"
               src={car.images[0]}
               alt="Car"
           />
