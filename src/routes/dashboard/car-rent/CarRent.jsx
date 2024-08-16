@@ -1,14 +1,4 @@
-import {
-  FaCar,
-  FaBuilding,
-  FaTags,
-  FaCalendarAlt,
-  FaPalette,
-  FaDollarSign,
-  FaGasPump,
-  FaCogs,
-  FaChair,
-} from "react-icons/fa";
+import {FaCar, FaBuilding, FaTags, FaCalendarAlt, FaPalette, FaDollarSign, FaGasPump, FaCogs, FaChair,} from "react-icons/fa";
 import {Button, Steps} from "antd";
 import {useState} from "react";
 import CarFormStep1 from "../../../components/create-car/CarFormStep1.jsx";
@@ -17,15 +7,37 @@ import CarFormStep2 from "../../../components/create-car/CarFormStep2.jsx";
 const steps = [
   {
     title: 'First',
-    content: <CarFormStep1/>,
+    content: (carData, setCarData) => <CarFormStep1 carData={carData} setCarData={setCarData} />,
   },
   {
     title: 'Second',
-    content: <CarFormStep2/>,
+    content: (carData, setCarData) => <CarFormStep2 carData={carData} setCarData={setCarData}/>,
   },
 ];
 
 const CarRent = () => {
+  const [carData, setCarData] = useState({
+    name: null,
+    images: [],
+    description: null,
+    price: null,
+    status: 'active',
+    rent_price: null,
+    color: null,
+    colors: [],
+    model: null,
+    category: null,
+    year: null,
+    fuel: null,
+    transmission: null,
+    seats: null,
+    thumbnail: null,
+    discount: null,
+    capacity_fuel: null,
+    usage_per_km: null,
+  });
+
+  console.log(carData)
 
   const [current, setCurrent] = useState(0);
   const next = () => {
@@ -43,7 +55,7 @@ const CarRent = () => {
       <div className="flex justify-between items-start w-full gap-5 p-2">
         <div className="w-[70%]">
           <Steps current={current} items={items}/>
-          <div>{steps[current].content}</div>
+          <div>{steps[current].content(carData, setCarData)}</div>
           <div className="text-end">
             {current > 0 && (
                 <Button
