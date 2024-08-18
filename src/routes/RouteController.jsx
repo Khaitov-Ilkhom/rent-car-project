@@ -17,6 +17,7 @@ const Profile = lazy(() => import("./dashboard/profile/Profile.jsx"));
 const Setting = lazy(() => import("./dashboard/setting/Setting.jsx"));
 
 const Categories = lazy(() => import("./categories/Categories.jsx"));
+const CarDetails = lazy(() => import("./car-details/CarDetails.jsx"));
 
 const RouteController = () => {
   return useRoutes([
@@ -75,6 +76,10 @@ const RouteController = () => {
     {
       path: "categories",
       element: <Suspense><Categories/></Suspense>,
+    },
+    {
+      path: "car-details",
+      element: <Suspense><CarDetails/></Suspense>,
     }
   ])
 }

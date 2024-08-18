@@ -9,9 +9,25 @@ const carApi = api.injectEndpoints({
           categories: params?.categories,
           ...params
         }
-      })
+      }),
+      providesTags: ["CARS"]
+    }),
+    createCar: build.mutation({
+      query: (body) => ({
+        url: "cars/create",
+        method: "POST",
+        body
+      }),
+      invalidatesTags: ["CARS"]
+    }),
+    deleteCar: build.mutation({
+      query: (id) => ({
+        url: `/cars/${id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ["CARS"]
     })
   })
 })
 
-export const {useGetAllCarQuery} = carApi
+export const {useGetAllCarQuery, useDeleteCarMutation, useCreateCarMutation} = carApi

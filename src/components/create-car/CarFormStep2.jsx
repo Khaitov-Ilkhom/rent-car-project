@@ -1,24 +1,28 @@
-import {Form, Upload, InputNumber, Tag, Select} from "antd";
+import {Form, Upload, Tag, Select} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import {useForm} from "antd/es/form/Form";
+import {useDeleteUploadFileMutation} from "../../redux/api/file-api.jsx";
 
 const options = [
-  { value: "black", label: "Black" },
-  { value: "white", label: "White" },
-  { value: "silver", label: "Silver" },
-  { value: "gray", label: "Gray" },
-  { value: "red", label: "Red" },
-  { value: "blue", label: "Blue" },
-  { value: "orange", label: "Orange" },
-  { value: "brown", label: "Brown" },
-  { value: "gold", label: "Gold" },
-  { value: "beige", label: "Beige" },
-  { value: "teal", label: "Teal" },
+  {value: "black", label: "Black"},
+  {value: "white", label: "White"},
+  {value: "silver", label: "Silver"},
+  {value: "gray", label: "Gray"},
+  {value: "red", label: "Red"},
+  {value: "blue", label: "Blue"},
+  {value: "orange", label: "Orange"},
+  {value: "brown", label: "Brown"},
+  {value: "gold", label: "Gold"},
+  {value: "beige", label: "Beige"},
+  {value: "teal", label: "Teal"},
 ];
 
 const CarFormStep2 = ({carData, setCarData}) => {
+  const [form] = useForm()
+
+  const [deleteFile] = useDeleteUploadFileMutation()
   const tagRender = (props) => {
-    const { label, value, closable, onClose } = props;
+    const {label, value, closable, onClose} = props;
     const onPreventMouseDown = (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -46,13 +50,15 @@ const CarFormStep2 = ({carData, setCarData}) => {
         formData.append('files', fileList[i].originFileObj)
       }
 
-      fetch("http://13.51.206.62:8000/api/upload/multiple", {
-        method: "POST",
-        body: formData
-      }).then(res => res.json())
-          .then(data => {
-            setCarData({...carData, images: data?.payload});
-          })
+      if (fileList.length > 0) {
+        fetch("http://13.51.206.62:8000/api/upload/multiple", {
+          method: "POST",
+          body: formData
+        }).then(res => res.json())
+            .then(data => {
+              setCarData({...carData, images: data?.payload});
+            })
+      }
 
     }
   }
@@ -70,11 +76,16 @@ const CarFormStep2 = ({carData, setCarData}) => {
 
     }
   }
-  const [form] = useForm()
 
   const changeFormData = () => {
     const values = form.getFieldsValue();
     setCarData({...carData, ...values, images: carData.images, thumbnail: carData.thumbnail});
+  }
+  const deletedFiles = (data) => {
+    deleteFile({name: data?.originFileObj?.name})
+  }
+  const deletedFile = (data) => {
+    deleteFile({name: data?.name})
   }
 
   return (
@@ -90,19 +101,24 @@ const CarFormStep2 = ({carData, setCarData}) => {
             name="images"
             rules={[{required: true, message: "Please upload car images"}]}
         >
-          <Upload listType="picture-card" multiple beforeUpload={() => false} onChange={handleUploadFiles}>
+          <Upload fileList={carData?.images?.map(image => ({uid: image, name: image, url: image}))}
+                  listType="picture-card" multiple beforeUpload={() => false} onChange={handleUploadFiles}
+                  onRemove={(data) => deletedFiles(data)}>
             <div>
               <UploadOutlined/>
               <div className="mt-2">Upload</div>
             </div>
           </Upload>
         </Form.Item>
+
         <Form.Item
             label="Thumbnail Image"
             name="thumbnail"
             rules={[{required: true, message: "Please upload a thumbnail image"}]}
         >
-          <Upload className="w-[80px] " listType="picture-card" beforeUpload={() => false} onChange={handleUploadFile}>
+          <Upload fileList={carData?.thumbnail} listType="picture-card" maxCount={1} beforeUpload={() => false}
+                  onChange={handleUploadFile}
+                  onRemove={(data) => deletedFile(data)}>
             <div>
               <UploadOutlined/>
               <div className="mt-2">Upload</div>
@@ -144,55 +160,6 @@ const CarFormStep2 = ({carData, setCarData}) => {
                 placeholder="Select Colors"
                 options={options}
                 tagRender={tagRender}
-            />
-          </Form.Item>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Form.Item
-              className="flex-1"
-              label="Purchase Price"
-              name="price"
-              rules={[
-                {required: true, message: "Please enter the purchase price"},
-              ]}
-          >
-            <InputNumber
-                min={0}
-                formatter={(value) => `$ ${value}`}
-                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                placeholder="Enter purchase price"
-                className="text-[16px] border rounded border-slate-400 hover:border-slate-500 w-full"
-            />
-          </Form.Item>
-
-          <Form.Item
-              className="flex-1"
-              label="Rent Price"
-              name="rent_price"
-              rules={[{required: true, message: "Please enter the rent price"}]}
-          >
-            <InputNumber
-                min={0}
-                formatter={(value) => `$ ${value}`}
-                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                placeholder="Enter rent price"
-                className="text-[16px] border rounded border-slate-400 hover:border-slate-500 w-full"
-            />
-          </Form.Item>
-
-          <Form.Item
-              className="flex-1"
-              label="Discount Rent Price"
-              name="discount"
-              rules={[{required: false}]}
-          >
-            <InputNumber
-                min={0}
-                formatter={(value) => `$ ${value}`}
-                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                placeholder="Enter discount rent price (optional)"
-                className="text-[16px] border rounded border-slate-400 hover:border-slate-500 w-full"
             />
           </Form.Item>
         </div>

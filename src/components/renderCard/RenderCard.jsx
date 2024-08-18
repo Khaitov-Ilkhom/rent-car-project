@@ -1,9 +1,4 @@
-import {
-  CarCardFillHeart,
-  CarCardGasoline,
-  CarCardManuals,
-  CarCardPeople,
-} from "../../images/svgs.jsx";
+import {CarCardFillHeart, CarCardGasoline, CarCardManuals, CarCardPeople} from "../../images/svgs.jsx";
 import {Link} from "react-router-dom";
 
 const CarCard = ({car}) => {
@@ -55,7 +50,7 @@ const CarCard = ({car}) => {
             <span className="text-sm font-bold text-[#90a3bf]">day</span>
           </div>
           <Link
-              to={"/category/details"}
+              to={"/car-details"}
               className="mt-2 flex max-w-max rounded bg-blue-600 px-5 py-[10px] text-center text-base font-semibold leading-normal text-white"
           >
             Rent Now
