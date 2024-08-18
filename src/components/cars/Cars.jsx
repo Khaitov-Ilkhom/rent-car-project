@@ -15,7 +15,7 @@ const Cars = ({ data, loading, title, link, slice, className}) => {
                 <Loading />
             ) : (
                 <div className={`grid ${className}`}>
-                  {data?.payload.slice(0, slice).map((car) => (
+                  {data?.payload.slice(0, slice).reverse().map((car) => (
                       <Card key={car._id} car={car} />
                   ))}
                 </div>

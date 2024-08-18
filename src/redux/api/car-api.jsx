@@ -12,6 +12,11 @@ const carApi = api.injectEndpoints({
       }),
       providesTags: ["CARS"]
     }),
+    getCar: build.query({
+      query: (id) => ({
+        url: `cars/${id}`,
+      })
+    }),
     createCar: build.mutation({
       query: (body) => ({
         url: "cars/create",
@@ -30,4 +35,4 @@ const carApi = api.injectEndpoints({
   })
 })
 
-export const {useGetAllCarQuery, useDeleteCarMutation, useCreateCarMutation} = carApi
+export const {useGetAllCarQuery, useDeleteCarMutation, useCreateCarMutation, useGetCarQuery} = carApi

@@ -50,7 +50,7 @@ const CarCard = ({car}) => {
             <span className="text-sm font-bold text-[#90a3bf]">day</span>
           </div>
           <Link
-              to={"/car-details"}
+              to={`/car-details/${car._id}`}
               className="mt-2 flex max-w-max rounded bg-blue-600 px-5 py-[10px] text-center text-base font-semibold leading-normal text-white"
           >
             Rent Now

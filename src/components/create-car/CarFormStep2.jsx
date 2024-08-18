@@ -116,8 +116,7 @@ const CarFormStep2 = ({carData, setCarData}) => {
             name="thumbnail"
             rules={[{required: true, message: "Please upload a thumbnail image"}]}
         >
-          <Upload fileList={carData?.thumbnail} listType="picture-card" maxCount={1} beforeUpload={() => false}
-                  onChange={handleUploadFile}
+          <Upload listType="picture-card" maxCount={1} beforeUpload={() => false} onChange={handleUploadFile}
                   onRemove={(data) => deletedFile(data)}>
             <div>
               <UploadOutlined/>

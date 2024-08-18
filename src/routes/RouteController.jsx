@@ -78,7 +78,7 @@ const RouteController = () => {
       element: <Suspense><Categories/></Suspense>,
     },
     {
-      path: "car-details",
+      path: "car-details/:id",
       element: <Suspense><CarDetails/></Suspense>,
     }
   ])
