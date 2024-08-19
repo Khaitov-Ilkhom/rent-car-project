@@ -1,8 +1,13 @@
-import React from 'react'
+import {useGetProfileQuery} from "../../../redux/api/user-api.jsx";
 
 const Profile = () => {
+  const {data} = useGetProfileQuery()
+  console.log(data)
+
   return (
-      <div>Profile</div>
+      <div>
+
+      </div>
   )
 }
 export default Profile

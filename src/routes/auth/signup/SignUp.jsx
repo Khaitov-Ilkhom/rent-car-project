@@ -14,24 +14,24 @@ import {
 const {Text, Title} = Typography;
 
 const SignUp = () => {
-  const [signUp, {data, isSuccess, isLoading}] = useSignUpMutation()
+  const [signUp, {data, isSuccess, isLoading, isError}] = useSignUpMutation()
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-
-  console.log(data)
+  const [userInfo, setUserInfo] = useState({});
 
   const onFinish = (values) => {
     signUp(values)
-    setEmail(values.email)
+    setUserInfo(values)
   };
 
   useEffect(() => {
       if (isSuccess) {
-        message.success(data.message)
-        // navigate(`/auth/verify-otp?email=${btoa(email)}`)
-        navigate(`/auth/signin`)
+        message.success(data?.message)
+        navigate(`/auth/verify-otp?email=${btoa(userInfo.email)}&password=${btoa(userInfo.password)}&first-name=${btoa(userInfo.first_name)}`);
       }
-  }, [isSuccess]);
+      if (isError) {
+        message.error(data?.message)
+      }
+  }, [isSuccess, isError]);
 
   return (
       <div className="w-full m-auto flex justify-center items-center flex-col">

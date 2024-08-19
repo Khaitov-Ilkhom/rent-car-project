@@ -10,11 +10,12 @@ const VerifyOtp = lazy(() => import("./auth/verify-otp/VerifyOtp.jsx"));
 
 const Dashboard = lazy(() => import("./dashboard/Dashboard.jsx"));
 const CarRent = lazy(() => import("./dashboard/car-rent/CarRent.jsx"));
-const Inbox = lazy(() => import("./dashboard/inbox/Inbox.jsx"));
+const Category = lazy(() => import("./dashboard/categories/Category.jsx"));
 const Liked = lazy(() => import("./dashboard/liked/Liked.jsx"));
 const Notification = lazy(() => import("./dashboard/notification/Notification.jsx"));
 const Profile = lazy(() => import("./dashboard/profile/Profile.jsx"));
 const Setting = lazy(() => import("./dashboard/setting/Setting.jsx"));
+const Users = lazy(() => import("./dashboard/users/Users.jsx"));
 
 const Categories = lazy(() => import("./categories/Categories.jsx"));
 const CarDetails = lazy(() => import("./car-details/CarDetails.jsx"));
@@ -56,8 +57,12 @@ const RouteController = () => {
           element: <Suspense><CarRent/></Suspense>,
         },
         {
-          path: "inbox",
-          element: <Suspense><Inbox/></Suspense>,
+          path: "category",
+          element: <Suspense><Category/></Suspense>,
+        },
+        {
+          path: "users",
+          element: <Suspense><Users/></Suspense>,
         },
         {
           path: "liked",

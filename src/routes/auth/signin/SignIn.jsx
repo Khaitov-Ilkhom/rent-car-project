@@ -12,7 +12,7 @@ const {Text, Title} = Typography;
 
 
 const SignIn = () => {
-  const [signIn, {data, isSuccess, isLoading}] = useSignInMutation()
+  const [signIn, {data, isSuccess, isLoading, isError}] = useSignInMutation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,9 +23,12 @@ const SignIn = () => {
   useEffect(() => {
     if (data) {
       if (isSuccess) {
-        message.success(data.message)
+        message.success(data?.message)
         navigate("/")
         dispatch(saveToken({token: data?.payload?.accessToken}))
+      }
+      if (isError) {
+        message.error(data?.message)
       }
     }
   }, [isSuccess]);

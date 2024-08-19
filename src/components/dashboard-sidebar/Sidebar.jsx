@@ -3,7 +3,9 @@ import {Layout, Menu} from 'antd';
 import {NavLink} from "react-router-dom";
 import { IoHome, IoPersonSharp, IoNotifications, IoSettings } from "react-icons/io5";
 import { FaCar, FaHeart } from "react-icons/fa";
-import { BiSolidMessageDetail } from "react-icons/bi";
+import { BiCategory } from "react-icons/bi";
+import { PiUsersThreeBold } from "react-icons/pi";
+
 
 
 const {Sider} = Layout;
@@ -34,21 +36,26 @@ const Sidebar = ({collapsed}) => {
               },
               {
                 key: '4',
-                icon: <BiSolidMessageDetail size={22}/>,
-                label: <NavLink to="/dashboard/inbox">Inbox</NavLink>,
+                icon: <BiCategory size={22}/>,
+                label: <NavLink to="/dashboard/category">Categories</NavLink>,
               },
               {
                 key: '5',
+                icon: <PiUsersThreeBold size={22}/>,
+                label: <NavLink to="/dashboard/users">Users</NavLink>,
+              },
+              {
+                key: '6',
                 icon: <FaHeart size={22}/>,
                 label: <NavLink to="/dashboard/liked">Liked</NavLink>,
               },
               {
-                key: '6',
+                key: '7',
                 icon: <IoNotifications size={22}/>,
                 label: <NavLink to="/dashboard/notification">Notification</NavLink>,
               },
               {
-                key: '7',
+                key: '8',
                 icon: <IoSettings size={22}/>,
                 label: <NavLink to="/dashboard/setting">Setting</NavLink>,
               },
