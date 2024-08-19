@@ -18,7 +18,7 @@ const Categories = () => {
                       <div className="rounded-full border border-slate-400 overflow-hidden p-1 w-[150px] h-[150px] bg-white shadow-lg transition hover:shadow-xl">
                         <img src={category.image} className="rounded-full object-contain select-none" alt="" />
                       </div>
-                      <p className="text-center font-bold">{category.name}</p>
+                      <p className="text-center font-bold capitalize">{category.name}</p>
                     </Link>
                 ))}
               </div>
