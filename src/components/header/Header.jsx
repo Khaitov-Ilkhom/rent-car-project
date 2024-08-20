@@ -3,11 +3,12 @@ import {IoIosNotifications} from "react-icons/io";
 import {IoLogInOutline, IoLogOutOutline} from "react-icons/io5";
 import {SlUser} from "react-icons/sl";
 import {AiFillHeart} from "react-icons/ai";
-import {AutoComplete, Avatar, Badge, Dropdown, Space} from "antd";
+import {AutoComplete, Badge, Dropdown, Space} from "antd";
 import {BiSearch} from "react-icons/bi";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png"
 import {useGetProfileQuery} from "../../redux/api/user-api.jsx";
+import {FaRegUserCircle} from "react-icons/fa";
 
 
 const Header = () => {
@@ -89,10 +90,9 @@ const Header = () => {
                 >
                   <a onClick={(e) => e.preventDefault()}>
                     <Space>
-                      <div className="pb-2 flex justify-center items-center hover:scale-105 transition duration-700">
-                        <Avatar
-                            className="w-[44px] h-[44px] bg-slate-900  border border-gray-200 rounded-full"
-                            src="https://static.vecteezy.com/system/resources/thumbnails/027/951/137/small_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png"
+                      <div className="pb-2 flex justify-center items-center">
+                        <FaRegUserCircle
+                            className="w-[44px] h-[44px] text-[#596780] rounded-full"
                         />
                       </div>
                     </Space>

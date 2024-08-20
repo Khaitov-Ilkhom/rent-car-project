@@ -19,6 +19,7 @@ const SignIn = () => {
   const onFinish = (values) => {
     signIn(values)
   };
+  console.log(data)
 
   useEffect(() => {
     if (data) {
