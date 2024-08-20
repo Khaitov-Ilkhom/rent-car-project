@@ -1,38 +1,49 @@
-import { LuSettings2 } from "react-icons/lu";
+import {LuSettings2, LuLayoutDashboard} from "react-icons/lu";
 import {IoIosNotifications} from "react-icons/io";
 import {IoLogInOutline, IoLogOutOutline} from "react-icons/io5";
-import { SlUser } from "react-icons/sl";
+import {SlUser} from "react-icons/sl";
 import {AiFillHeart} from "react-icons/ai";
 import {AutoComplete, Avatar, Badge, Dropdown, Space} from "antd";
 import {BiSearch} from "react-icons/bi";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png"
+import {useGetProfileQuery} from "../../redux/api/user-api.jsx";
 
 
 const Header = () => {
   const navigate = useNavigate();
+  const {data} = useGetProfileQuery()
+  console.log(data)
 
   const items = [
     {
-      label: <div onClick={() => navigate("/dashboard")} className="bg-transparent flex items-center gap-2 text-[#596780]">
-        <span>Profile</span>
-        <SlUser/>
-      </div>,
-      key: '0',
+      label:
+          <div className="bg-transparent flex items-center gap-2 text-[#596780]">
+            <span>{data?.payload?.first_name}</span> <SlUser/>
+          </div>,
+      key: "0"
     },
     {
-      label: <div onClick={() => navigate("/auth/signin")} className="bg-transparent flex items-center gap-2 text-[#596780]">
+      label: <div onClick={() => navigate("/dashboard")}
+                  className="bg-transparent flex items-center gap-2 text-[#596780]">
+        <span>Dashboard</span> <LuLayoutDashboard/>
+      </div>,
+      key: '1',
+    },
+    {
+      label: <div onClick={() => navigate("/auth/signin")}
+                  className="bg-transparent flex items-center gap-2 text-[#596780]">
         <span>Sign in</span>
         <IoLogInOutline/>
       </div>,
-      key: '1',
+      key: '2',
     },
     {
       label: <div className="bg-transparent flex items-center gap-2 text-[#596780]">
         <span>Log Out</span>
         <IoLogOutOutline/>
       </div>,
-      key: '2',
+      key: '3',
     }
   ];
 
