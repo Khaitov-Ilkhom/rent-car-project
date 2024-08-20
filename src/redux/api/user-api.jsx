@@ -6,13 +6,22 @@ const usersApi = api.injectEndpoints({
       query: () => ({
         url: "/users",
       }),
+      providesTags: ["USER"]
     }),
     getProfile: build.query({
       query: () => ({
         url: "/auth/profile",
       }),
+      providesTags: ["USER"]
     }),
+    deletedUser: build.mutation({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: "DELETED",
+      }),
+      invalidatesTags: ["USER"]
+    })
   }),
 });
 
-export const { useGetAllUsersQuery, useGetProfileQuery } = usersApi
+export const { useGetAllUsersQuery, useGetProfileQuery, useDeletedUserMutation } = usersApi

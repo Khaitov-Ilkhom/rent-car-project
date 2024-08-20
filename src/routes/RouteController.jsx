@@ -8,6 +8,7 @@ const SignUp = lazy(() => import("./auth/signup/SignUp.jsx"));
 const SignIn = lazy(() => import("./auth/signin/SignIn.jsx"));
 const VerifyOtp = lazy(() => import("./auth/verify-otp/VerifyOtp.jsx"));
 
+const Protected = lazy(() => import("../routes/protected/Protected.jsx"));
 const Dashboard = lazy(() => import("./dashboard/Dashboard.jsx"));
 const CarRent = lazy(() => import("./dashboard/car-rent/CarRent.jsx"));
 const Category = lazy(() => import("./dashboard/categories/Category.jsx"));
@@ -46,36 +47,42 @@ const RouteController = () => {
     },
     {
       path: "dashboard",
-      element: <Suspense><Dashboard/></Suspense>,
+      element: <Suspense><Protected/></Suspense>,
       children: [
         {
-          path: "profile",
-          element: <Suspense><Profile/></Suspense>
+          path: "",
+          element: <Suspense><Dashboard/></Suspense>,
+          children: [
+            {
+              path: "profile",
+              element: <Suspense><Profile/></Suspense>
+            },
+            {
+              path: "car-rent",
+              element: <Suspense><CarRent/></Suspense>,
+            },
+            {
+              path: "category",
+              element: <Suspense><Category/></Suspense>,
+            },
+            {
+              path: "users",
+              element: <Suspense><Users/></Suspense>,
+            },
+            {
+              path: "liked",
+              element: <Suspense><Liked/></Suspense>,
+            },
+            {
+              path: "notification",
+              element: <Suspense><Notification/></Suspense>,
+            },
+            {
+              path: "setting",
+              element: <Suspense><Setting/></Suspense>,
+            }
+          ]
         },
-        {
-          path: "car-rent",
-          element: <Suspense><CarRent/></Suspense>,
-        },
-        {
-          path: "category",
-          element: <Suspense><Category/></Suspense>,
-        },
-        {
-          path: "users",
-          element: <Suspense><Users/></Suspense>,
-        },
-        {
-          path: "liked",
-          element: <Suspense><Liked/></Suspense>,
-        },
-        {
-          path: "notification",
-          element: <Suspense><Notification/></Suspense>,
-        },
-        {
-          path: "setting",
-          element: <Suspense><Setting/></Suspense>,
-        }
       ]
     },
     {
