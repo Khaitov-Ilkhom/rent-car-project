@@ -9,21 +9,27 @@ import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png"
 import {useGetProfileQuery} from "../../redux/api/user-api.jsx";
 import {FaRegUserCircle} from "react-icons/fa";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logOut} from "../../redux/slices/Auth-slice.jsx";
 
 
 const Header = () => {
   const navigate = useNavigate();
   const {data} = useGetProfileQuery()
   const {likedCars} = useSelector(state => state.like)
+  const dispatch = useDispatch();
+  const logOutUser = () => {
+    dispatch(logOut());
+    window.location.reload();
+  };
 
   console.log(data?.payload?.role)
   const items = [
     {
-      label:
+      label: data?.payload ?
           <div className="bg-transparent flex items-center gap-2 text-[#596780]">
             <span>{data?.payload?.first_name}</span> <SlUser/>
-          </div>,
+          </div> : <div className="bg-transparent flex items-center gap-2 text-[#596780]">User not registered</div>,
       key: "0"
     },
     {
@@ -42,7 +48,7 @@ const Header = () => {
       key: '2',
     },
     {
-      label: <div className="bg-transparent flex items-center gap-2 text-[#596780]">
+      label: <div onClick={logOutUser} className="bg-transparent flex items-center gap-2 text-[#596780]">
         <span>Log Out</span>
         <IoLogOutOutline/>
       </div>,
