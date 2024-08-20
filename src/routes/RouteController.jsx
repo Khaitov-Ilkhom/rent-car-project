@@ -1,6 +1,7 @@
-import {useRoutes} from "react-router-dom";
+import {Navigate, useRoutes} from "react-router-dom";
 import {SuspenseElement as Suspense} from "../utils/Index.jsx";
 import {lazy} from "react";
+import {useGetProfileQuery} from "../redux/api/user-api.jsx";
 
 const Home = lazy(() => import("./home/Home.jsx"));
 const Auth = lazy(() => import("./auth/Auth.jsx"));
@@ -12,7 +13,7 @@ const Protected = lazy(() => import("../routes/protected/Protected.jsx"));
 const Dashboard = lazy(() => import("./dashboard/Dashboard.jsx"));
 const CarRent = lazy(() => import("./dashboard/car-rent/CarRent.jsx"));
 const Category = lazy(() => import("./dashboard/categories/Category.jsx"));
-const Liked = lazy(() => import("./dashboard/liked/Liked.jsx"));
+const Liked = lazy(() => import("./liked-cars/Liked.jsx"));
 const Notification = lazy(() => import("./dashboard/notification/Notification.jsx"));
 const Profile = lazy(() => import("./dashboard/profile/Profile.jsx"));
 const Setting = lazy(() => import("./dashboard/setting/Setting.jsx"));
@@ -20,8 +21,10 @@ const Users = lazy(() => import("./dashboard/users/Users.jsx"));
 
 const Categories = lazy(() => import("./categories/Categories.jsx"));
 const CarDetails = lazy(() => import("./car-details/CarDetails.jsx"));
+const NotFound = lazy(() => import("./not-found/NotFound.jsx"));
 
 const RouteController = () => {
+  const {data} = useGetProfileQuery()
   return useRoutes([
     {
       path: "",
@@ -47,7 +50,7 @@ const RouteController = () => {
     },
     {
       path: "dashboard",
-      element: <Suspense><Protected/></Suspense>,
+      element: data?.payload && data?.payload?.role === "admin" ? <Suspense><Protected/></Suspense> : <Navigate to="notfound"/>,
       children: [
         {
           path: "",
@@ -83,15 +86,27 @@ const RouteController = () => {
             }
           ]
         },
+        {
+          path: "categories",
+          element: <Suspense><Categories/></Suspense>,
+        },
+        {
+          path: "car-details/:id",
+          element: <Suspense><CarDetails/></Suspense>,
+        },
+        {
+          path: "liked-cars",
+          element: <Suspense><Liked/></Suspense>,
+        },
       ]
     },
     {
-      path: "categories",
-      element: <Suspense><Categories/></Suspense>,
+      path: "notfound",
+      element: <Suspense><NotFound/></Suspense>
     },
     {
-      path: "car-details/:id",
-      element: <Suspense><CarDetails/></Suspense>,
+      path: "*",
+      element: <Suspense><Navigate to="notfound"/></Suspense>
     }
   ])
 }

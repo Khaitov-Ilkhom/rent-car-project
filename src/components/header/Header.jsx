@@ -9,13 +9,15 @@ import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png"
 import {useGetProfileQuery} from "../../redux/api/user-api.jsx";
 import {FaRegUserCircle} from "react-icons/fa";
+import {useSelector} from "react-redux";
 
 
 const Header = () => {
   const navigate = useNavigate();
   const {data} = useGetProfileQuery()
-  console.log(data)
+  const {likedCars} = useSelector(state => state.like)
 
+  console.log(data?.payload?.role)
   const items = [
     {
       label:
@@ -25,10 +27,10 @@ const Header = () => {
       key: "0"
     },
     {
-      label: <div onClick={() => navigate("/dashboard")}
+      label: data?.payload && data?.payload?.role === "admin" ? <div onClick={() => navigate("/dashboard")}
                   className="bg-transparent flex items-center gap-2 text-[#596780]">
         <span>Dashboard</span> <LuLayoutDashboard/>
-      </div>,
+      </div> : <div className="!h-[1px]"></div>,
       key: '1',
     },
     {
@@ -68,8 +70,8 @@ const Header = () => {
                 </form>
               </div>
               <div className="flex items-center gap-3">
-                <Link to={"/dashboard/liked"}>
-                  <Badge size="large" count={5}>
+                <Link to={"/liked-cars"}>
+                  <Badge size="large" count={likedCars?.length}>
                     <div className="p-2 bg-white border border-gray-200 rounded-full">
                       <AiFillHeart className="text-[#596780] text-2xl"/>
                     </div>
@@ -92,7 +94,7 @@ const Header = () => {
                     <Space>
                       <div className="pb-2 flex justify-center items-center">
                         <FaRegUserCircle
-                            className="w-[44px] h-[44px] text-[#596780] rounded-full"
+                            className="w-[40px] h-[40px] text-[#596780] rounded-full"
                         />
                       </div>
                     </Space>

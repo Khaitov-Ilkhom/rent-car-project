@@ -1,11 +1,11 @@
 import {useDeletedUserMutation, useGetAllUsersQuery} from "../../../redux/api/user-api.jsx";
-import {Button, Image, Modal, Table} from "antd";
+import {Button, Image, message, Modal, Table} from "antd";
 import userAvatar from "../../../images/User-avatar.png"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Profile = () => {
   const {data} = useGetAllUsersQuery()
-  const [deleteUser] = useDeletedUserMutation()
+  const [deleteUser, {data: deleteData, isSuccess, isError}] = useDeletedUserMutation()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   const showModal = (users) => {
@@ -19,6 +19,15 @@ const Profile = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success(deleteData?.message)
+    }
+    if (isError) {
+      message.error("Error deleting user");
+    }
+  }, [isSuccess, isError]);
 
   const columns = [
     {

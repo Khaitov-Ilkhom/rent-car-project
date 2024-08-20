@@ -2,10 +2,12 @@ import {useParams} from "react-router-dom";
 import {useGetCarQuery} from "../../redux/api/car-api.jsx";
 import Header from "../../components/header/Header.jsx";
 import Footer from "../../components/footer/Footer.jsx";
-import {CarCardFillHeart} from "../../images/svgs.jsx";
 import {useGetCategoriesQuery} from "../../redux/api/categories.jsx";
 import {Carousel, Image} from "antd";
 import {useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addToLiked} from "../../redux/slices/LikeSlice.jsx";
+import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 
 const CarDetails = () => {
   const {id} = useParams()
@@ -13,6 +15,15 @@ const CarDetails = () => {
   const {categories} = useGetCategoriesQuery();
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef(null);
+  const { likedCars } = useSelector((state) => state.like);
+  const dispatch = useDispatch();
+
+  const isProductLiked = (carId) => {
+    return likedCars?.some(car => car._id === carId)
+  };
+  const handleLike = (car) => {
+    dispatch(addToLiked(car));
+  }
 
   return (
       <div className="flex w-full flex-col">
@@ -54,8 +65,11 @@ const CarDetails = () => {
                       </span>
                       </div>
                     </div>
-                    <button className="">
-                      <CarCardFillHeart/>
+                    <button className="flex items-center gap-1" onClick={() => handleLike(data?.payload)}>
+                      {
+                        isProductLiked(data?.payload?._id) ? <AiFillHeart className="text-red-500 text-2xl"/> :
+                            <AiOutlineHeart className="text-red-500 text-2xl"/>
+                      }
                     </button>
                   </div>
                   <div className="flex items-center gap-4">

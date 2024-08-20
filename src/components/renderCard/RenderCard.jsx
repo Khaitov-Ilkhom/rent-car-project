@@ -1,7 +1,22 @@
-import {CarCardFillHeart, CarCardGasoline, CarCardManuals, CarCardPeople} from "../../images/svgs.jsx";
+import {CarCardGasoline, CarCardManuals, CarCardPeople} from "../../images/svgs.jsx";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {addToLiked} from "../../redux/slices/LikeSlice.jsx";
+import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 
-const CarCard = ({car}) => {
+const RenderCard = ({car}) => {
+  const { likedCars } = useSelector((state) => state.like);
+  const dispatch = useDispatch();
+
+  const isProductLiked = (carId) => {
+    return likedCars?.some(car => car._id === carId)
+
+  };
+
+  const handleLike = () => {
+    dispatch(addToLiked(car));
+  }
+
   return (
       <div className="rounded-[10px] bg-white p-6 shadow-lg transition hover:shadow-2xl">
         <div className="flex w-full items-start justify-between">
@@ -9,8 +24,11 @@ const CarCard = ({car}) => {
             <span className="text-xl font-bold">{car.name}</span>
             <span className="text-sm font-bold text-[#90a3bf]">{car.model}</span>
           </div>
-          <button>
-            <CarCardFillHeart/>
+          <button className="flex items-center gap-1" onClick={() => handleLike(car)}>
+            {
+              isProductLiked(car._id) ? <AiFillHeart className="text-red-500 text-2xl"/> :
+                  <AiOutlineHeart className="text-red-500 text-2xl"/>
+            }
           </button>
         </div>
 
@@ -60,4 +78,4 @@ const CarCard = ({car}) => {
   );
 };
 
-export default CarCard;
+export default RenderCard;

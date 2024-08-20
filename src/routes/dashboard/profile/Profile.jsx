@@ -63,9 +63,9 @@ const Profile = () => {
   return (
       <div className="w-full flex justify-center items-center flex-col mx-auto gap-4">
         <div>
-          <div className="max-w-[200px] border rounded-full p-4 my-5">
+          <div className="max-w-[200px] border rounded-full p-2 my-5">
             {
-              data?.payload?.avatar ? <Image className="" src={data?.payload?.avatar} alt="User avatar"/> :
+              data?.payload?.avatar ? <Image className="rounded-full" src={data?.payload?.avatar} alt="User avatar"/> :
                   <Image className="rounded-full" src={userAvatar} alt="User avatar"/>
             }
           </div>
