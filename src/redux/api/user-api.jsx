@@ -20,8 +20,16 @@ const usersApi = api.injectEndpoints({
         method: "DELETED",
       }),
       invalidatesTags: ["USER"]
+    }),
+    updateUser: build.mutation({
+      query: (data) => ({
+        url: `/users/${data.id}`,
+        method: "PUT",
+        body: {avatar: data.avatar}
+      }),
+      invalidatesTags: ["USER"]
     })
   }),
 });
 
-export const { useGetAllUsersQuery, useGetProfileQuery, useDeletedUserMutation } = usersApi
+export const { useGetAllUsersQuery, useGetProfileQuery, useDeletedUserMutation, useUpdateUserMutation } = usersApi

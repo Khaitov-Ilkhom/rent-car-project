@@ -53,6 +53,9 @@ const CarFormStep2 = ({carData, setCarData}) => {
       if (fileList.length > 0) {
         fetch("http://13.51.206.62:8000/api/upload/multiple", {
           method: "POST",
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+          },
           body: formData
         }).then(res => res.json())
             .then(data => {
@@ -68,6 +71,9 @@ const CarFormStep2 = ({carData, setCarData}) => {
       formData.append('file', file)
       fetch("http://13.51.206.62:8000/api/upload/single", {
         method: "POST",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
         body: formData
       }).then(res => res.json())
           .then(data => {

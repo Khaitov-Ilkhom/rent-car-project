@@ -75,7 +75,7 @@ const Profile = () => {
   return (
       <div>
         <div className="mt-4">
-          <Table pagination={{pageSize: 5}} columns={columns}
+          <Table pagination={{pageSize: 6}} columns={columns}
                  dataSource={data?.payload.map(users => ({key: users._id, ...users}))}/>
         </div>
         <Modal
