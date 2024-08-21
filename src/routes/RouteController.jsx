@@ -1,7 +1,7 @@
 import {Navigate, useRoutes} from "react-router-dom";
 import {SuspenseElement as Suspense} from "../utils/Index.jsx";
 import {lazy} from "react";
-import {useGetProfileQuery} from "../redux/api/user-api.jsx";
+import {useSelector} from "react-redux";
 
 const Home = lazy(() => import("./home/Home.jsx"));
 const Auth = lazy(() => import("./auth/Auth.jsx"));
@@ -24,7 +24,7 @@ const CarDetails = lazy(() => import("./car-details/CarDetails.jsx"));
 const NotFound = lazy(() => import("./not-found/NotFound.jsx"));
 
 const RouteController = () => {
-  const {data} = useGetProfileQuery()
+  const {user} = useSelector(state => state.auth);
   return useRoutes([
     {
       path: "",
@@ -50,7 +50,7 @@ const RouteController = () => {
     },
     {
       path: "dashboard",
-      element: data?.payload && data?.payload?.role === "admin" ? <Suspense><Protected/></Suspense> : <Navigate to="notfound"/>,
+      element: user?.role && user?.role === "admin" ? <Suspense><Protected/></Suspense> : <Navigate to="notfound"/>,
       children: [
         {
           path: "",

@@ -23,7 +23,6 @@ const Header = () => {
     window.location.reload();
   };
 
-  console.log(data?.payload?.role)
   const items = [
     {
       label: data?.payload ?
