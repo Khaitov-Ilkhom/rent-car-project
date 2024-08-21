@@ -1,13 +1,17 @@
-import {useDeletedUserMutation, useGetAllUsersQuery} from "../../../redux/api/user-api.jsx";
+import {useDeletedUserMutation, useGetAllUsersQuery, usePromoteUserMutation} from "../../../redux/api/user-api.jsx";
 import {Button, Image, message, Modal, Table} from "antd";
 import userAvatar from "../../../images/User-avatar.png"
 import {useEffect, useState} from "react";
+import * as userData from "antd";
 
 const Profile = () => {
   const {data} = useGetAllUsersQuery()
+  const [promotedUser, {data: promoteData, isSuccess: promoteSuccess, isError: promoteError}] = usePromoteUserMutation()
   const [deleteUser, {data: deleteData, isSuccess, isError}] = useDeletedUserMutation()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [promUser, setPromUser] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const showModal = (users) => {
     setUserId(users._id)
     setIsModalOpen(true);
@@ -20,6 +24,21 @@ const Profile = () => {
     setIsModalOpen(false);
   };
 
+  const promoteUser = (user) => {
+    setModalOpen(true)
+    setPromUser(user)
+  }
+  const handleOkey = () => {
+    if (promUser.role !== "admin") {
+      promotedUser(promUser._id)
+    } else {
+      message.error("This user is admin you cannot give him admin")
+    }
+  }
+  const closeModal = () => {
+    setModalOpen(false);
+  }
+
   useEffect(() => {
     if (isSuccess) {
       message.success(deleteData?.message)
@@ -28,6 +47,15 @@ const Profile = () => {
       message.error("Error deleting user");
     }
   }, [isSuccess, isError]);
+  useEffect(() => {
+    if (promoteSuccess) {
+      message.success(promoteData?.message)
+      setModalOpen(false)
+    }
+    if (promoteError) {
+      message.error(promoteData?.message)
+    }
+  }, [promoteSuccess, promoteError]);
 
   const columns = [
     {
@@ -76,6 +104,7 @@ const Profile = () => {
       title: "Actions",
       key: "actions",
       render: (users) => <div className="flex items-center gap-2 ">
+        <Button disabled={users.role === "admin"} type="primary" onClick={() => promoteUser(users)}>Promote</Button>
         <Button danger onClick={() => showModal(users)}>Delete</Button>
       </div>
     }
@@ -96,6 +125,16 @@ const Profile = () => {
             onCancel={handleCancel}
         >
           <span>Are you sure you want to delete this user</span>
+        </Modal>
+        <Modal
+            centered
+            title="Deleted User"
+            maskClosable={false}
+            open={modalOpen}
+            onOk={handleOkey}
+            onCancel={closeModal}
+        >
+          <span>Do you want to give the user the admin role?</span>
         </Modal>
       </div>
   )

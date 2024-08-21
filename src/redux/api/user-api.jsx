@@ -29,7 +29,14 @@ const usersApi = api.injectEndpoints({
       }),
       invalidatesTags: ["USER"]
     }),
+    promoteUser: build.mutation({
+      query: (id) => ({
+        url: `/users/promote/${id}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["USER"]
+    }),
   }),
 });
 
-export const { useGetAllUsersQuery, useGetProfileQuery, useDeletedUserMutation, useUpdateUserMutation } = usersApi
+export const { useGetAllUsersQuery, useGetProfileQuery, useDeletedUserMutation, useUpdateUserMutation, usePromoteUserMutation } = usersApi
