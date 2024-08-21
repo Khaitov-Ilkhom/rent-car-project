@@ -111,11 +111,11 @@ const Header = () => {
                   <img className="max-w-[140px] object-contain" src={logo} alt="logo"/>
                 </Link>
                 <Form initialValues={{search: getParam("q")}} onFinish={handleSearchSubmit}
-                      className="flex items-center gap-3 bg-[#fefefe] h-[50px] w-[500px] py-1 px-4 rounded-[62px] border border-gray-300 hover:border-[#1677FF]">
+                      className="flex items-center gap-3 bg-[#fefefe] h-[45px] w-[500px] py-1 px-4 rounded-[62px] border border-gray-300 hover:border-[#1677FF]">
                   <BiSearch className="text-[#0000005f] text-2xl"/>
                   <Form.Item
                       name="search"
-                      className="w-full"
+                      className="w-full !mb-0"
                       rules={[{required: false}]}
                   >
                     <AutoComplete
