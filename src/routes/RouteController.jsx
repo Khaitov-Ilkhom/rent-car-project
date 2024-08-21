@@ -85,20 +85,20 @@ const RouteController = () => {
               element: <Suspense><Setting/></Suspense>,
             }
           ]
-        },
-        {
-          path: "categories",
-          element: <Suspense><Categories/></Suspense>,
-        },
-        {
-          path: "car-details/:id",
-          element: <Suspense><CarDetails/></Suspense>,
-        },
-        {
-          path: "liked-cars",
-          element: <Suspense><Liked/></Suspense>,
-        },
+        }
       ]
+    },
+    {
+      path: "categories",
+      element: <Suspense><Categories/></Suspense>,
+    },
+    {
+      path: "car-details/:id",
+      element: <Suspense><CarDetails/></Suspense>,
+    },
+    {
+      path: "liked-cars",
+      element: <Suspense><Liked/></Suspense>,
     },
     {
       path: "notfound",
