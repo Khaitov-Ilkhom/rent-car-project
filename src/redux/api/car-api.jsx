@@ -31,8 +31,15 @@ const carApi = api.injectEndpoints({
         method: 'DELETE'
       }),
       invalidatesTags: ["CARS"]
-    })
+    }),
+    searchCars: build.query({
+      query: (params) => ({
+        url: "/cars/search",
+        params
+      }),
+      providesTags: ["CARS"]
+    }),
   })
 })
 
-export const {useGetAllCarQuery, useDeleteCarMutation, useCreateCarMutation, useGetCarQuery} = carApi
+export const {useGetAllCarQuery, useDeleteCarMutation, useCreateCarMutation, useGetCarQuery, useSearchCarsQuery} = carApi

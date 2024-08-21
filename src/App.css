@@ -46,7 +46,7 @@
   opacity: 1 !important;
 }
 
-/* header search input style */
+
 .slick-arrow {
   opacity: 0 !important;
   width: 40px !important;
@@ -58,6 +58,7 @@
   width: 30px !important;
   height: 30px !important;
 }
+/* header search input style */
 .search_input {
   appearance: none;
   background-color: transparent;
@@ -70,6 +71,7 @@
   outline: none !important;
   background-color: transparent !important;
   box-shadow: none !important;
+  margin-top: 18px !important;
 }
 
 /* create form upload file style */

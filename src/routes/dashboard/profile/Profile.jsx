@@ -56,7 +56,6 @@ const Profile = () => {
           .then(data => {
             setAvatar(data?.payload)
           })
-
     }
   }
 

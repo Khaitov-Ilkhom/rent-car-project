@@ -28,7 +28,7 @@ const usersApi = api.injectEndpoints({
         body: {avatar: data.avatar}
       }),
       invalidatesTags: ["USER"]
-    })
+    }),
   }),
 });
 

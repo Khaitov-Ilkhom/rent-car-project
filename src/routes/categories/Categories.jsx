@@ -11,6 +11,7 @@ const Categories = () => {
 
   return (
       <div className="my-14">
+
         <Container>
           <div className="flex gap-5 items-start pt-[100px]">
             <CategorySidebar defaultCategoryId={searchParams.get("categoryId")}/>

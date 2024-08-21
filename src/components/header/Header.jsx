@@ -1,18 +1,25 @@
+import {AutoComplete, Badge, Dropdown, Form, Space} from "antd";
+import {Link, useNavigate} from "react-router-dom";
+import logo from "../../images/logo.png"
+import {useGetProfileQuery} from "../../redux/api/user-api.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {logOut} from "../../redux/slices/Auth-slice.jsx";
+
 import {LuSettings2, LuLayoutDashboard} from "react-icons/lu";
 import {IoIosNotifications} from "react-icons/io";
 import {IoLogInOutline, IoLogOutOutline} from "react-icons/io5";
 import {SlUser} from "react-icons/sl";
 import {AiFillHeart} from "react-icons/ai";
-import {AutoComplete, Badge, Dropdown, Space} from "antd";
-import {BiSearch} from "react-icons/bi";
-import {Link, useNavigate} from "react-router-dom";
-import logo from "../../images/logo.png"
-import {useGetProfileQuery} from "../../redux/api/user-api.jsx";
 import {FaRegUserCircle} from "react-icons/fa";
-import {useDispatch, useSelector} from "react-redux";
-import {logOut} from "../../redux/slices/Auth-slice.jsx";
+import {BiSearch} from "react-icons/bi";
+import useSearchParamsHook from "../../params-hook/useSearchParamsHook.jsx";
+import {useSearchCarsQuery} from "../../redux/api/car-api.jsx";
+import {useState} from "react";
 
 const Header = () => {
+  const [search, setSearch] = useState("");
+  const {getParam} = useSearchParamsHook()
+  const {data: searchData} = useSearchCarsQuery({q: search})
   const navigate = useNavigate();
   const {data} = useGetProfileQuery()
   const {likedCars} = useSelector(state => state.like)
@@ -22,61 +29,77 @@ const Header = () => {
     window.location.reload();
   };
 
-  const items = data?.payload && data?.payload?.role === "admin" ? [
-    {
-      label: data?.payload ?
-          <div className="bg-transparent flex items-center gap-2 text-[#596780]">
-            <span>{data?.payload?.first_name}</span> <SlUser/>
-          </div> : <div className="bg-transparent flex items-center gap-2 text-[#596780]">User not registered</div>,
-      key: "0"
-    },
-    {
-      label: <div onClick={() => navigate("/dashboard")}
-                  className="bg-transparent flex items-center gap-2 text-[#596780]">
-        <span>Dashboard</span> <LuLayoutDashboard/>
-      </div>,
-      key: '1',
-    },
-    {
-      label: <div onClick={() => navigate("/auth/signin")}
-                  className="bg-transparent flex items-center gap-2 text-[#596780]">
-        <span>Sign in</span>
-        <IoLogInOutline/>
-      </div>,
-      key: '2',
-    },
-    {
-      label: <div onClick={logOutUser} className="bg-transparent flex items-center gap-2 text-[#596780]">
-        <span>Log Out</span>
-        <IoLogOutOutline/>
-      </div>,
-      key: '3',
+  const handleSearchSubmit = (value) => {
+    navigate(`/search?q=${value.search}`);
+  };
+  const onSelect = (data) => {
+    console.log("onSelect", data);
+  };
+  const loadData = async (searchText) => {
+    try {
+      setSearch(searchText);
+    } catch (error) {
+      console.log(error);
     }
-  ] : [
-    {
-      label: data?.payload ?
-          <div className="bg-transparent flex items-center gap-2 text-[#596780]">
-            <span>{data?.payload?.first_name}</span> <SlUser/>
-          </div> : <div className="bg-transparent flex items-center gap-2 text-[#596780]">User not registered</div>,
-      key: "0"
-    },
+  };
 
-    {
-      label: <div onClick={() => navigate("/auth/signin")}
-                  className="bg-transparent flex items-center gap-2 text-[#596780]">
-        <span>Sign in</span>
-        <IoLogInOutline/>
-      </div>,
-      key: '1',
-    },
-    {
-      label: <div onClick={logOutUser} className="bg-transparent flex items-center gap-2 text-[#596780]">
-        <span>Log Out</span>
-        <IoLogOutOutline/>
-      </div>,
-      key: '2',
-    }
-  ];
+  const items = data?.payload && data?.payload?.role === "admin" ?
+      [
+        {
+          label: data?.payload ?
+              <div className="bg-transparent flex items-center gap-2 text-[#596780]">
+                <span>{data?.payload?.first_name}</span> <SlUser/>
+              </div> : <div className="bg-transparent flex items-center gap-2 text-[#596780]">User not registered</div>,
+          key: "0"
+        },
+        {
+          label: <div onClick={() => navigate("/dashboard")}
+                      className="bg-transparent flex items-center gap-2 text-[#596780]">
+            <span>Dashboard</span> <LuLayoutDashboard/>
+          </div>,
+          key: '1',
+        },
+        {
+          label: <div onClick={() => navigate("/auth/signin")}
+                      className="bg-transparent flex items-center gap-2 text-[#596780]">
+            <span>Sign in</span>
+            <IoLogInOutline/>
+          </div>,
+          key: '2',
+        },
+        {
+          label: <div onClick={logOutUser} className="bg-transparent flex items-center gap-2 text-[#596780]">
+            <span>Log Out</span>
+            <IoLogOutOutline/>
+          </div>,
+          key: '3',
+        }
+      ] :
+      [
+        {
+          label: data?.payload ?
+              <div className="bg-transparent flex items-center gap-2 text-[#596780]">
+                <span>{data?.payload?.first_name}</span> <SlUser/>
+              </div> : <div className="bg-transparent flex items-center gap-2 text-[#596780]">User not registered</div>,
+          key: "0"
+        },
+
+        {
+          label: <div onClick={() => navigate("/auth/signin")}
+                      className="bg-transparent flex items-center gap-2 text-[#596780]">
+            <span>Sign in</span>
+            <IoLogInOutline/>
+          </div>,
+          key: '1',
+        },
+        {
+          label: <div onClick={logOutUser} className="bg-transparent flex items-center gap-2 text-[#596780]">
+            <span>Log Out</span>
+            <IoLogOutOutline/>
+          </div>,
+          key: '2',
+        }
+      ];
 
   return (
       <>
@@ -87,15 +110,41 @@ const Header = () => {
                 <Link to={"/"}>
                   <img className="max-w-[140px] object-contain" src={logo} alt="logo"/>
                 </Link>
-                <form
-                    className="flex items-center gap-3 bg-[#fefefe] w-[500px] py-1 px-4 rounded-[62px] border border-gray-300 hover:border-[#1677FF]">
+                <Form initialValues={{search: getParam("q")}} onFinish={handleSearchSubmit}
+                      className="flex items-center gap-3 bg-[#fefefe] h-[50px] w-[500px] py-1 px-4 rounded-[62px] border border-gray-300 hover:border-[#1677FF]">
                   <BiSearch className="text-[#0000005f] text-2xl"/>
-                  <AutoComplete
-                      className="search_input"
-                      placeholder="Search..."
-                  />
+                  <Form.Item
+                      name="search"
+                      className="w-full"
+                      rules={[{required: false}]}
+                  >
+                    <AutoComplete
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            navigate(`/search?q=${search}`);
+                          }
+                        }}
+                        options={searchData?.payload?.map((item) => ({
+                          label: (
+                              <Link
+                                  className="block"
+                                  key={item._id}
+                                  to={`/car-details/${item._id}`}
+                              >
+                                {item.name}
+                              </Link>
+                          ),
+                        }))}
+                        className="search_input"
+                        onSelect={onSelect}
+                        onSearch={(text) =>
+                            text ? loadData(text) : loadData({payload: []})
+                        }
+                        placeholder="Search..."
+                    />
+                  </Form.Item>
                   <LuSettings2 className="text-[24px] text-gray-400"/>
-                </form>
+                </Form>
               </div>
               <div className="flex items-center gap-3">
                 <Link to={"/liked-cars"}>

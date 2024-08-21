@@ -42,7 +42,7 @@ const cars = [
 
 const Hero = () => {
   return (
-      <Carousel autoplay className='bg-slate-200 mt-[100px]' arrows infinite={true}>
+      <Carousel autoplay className='bg-slate-200 pt-[100px]' arrows infinite={true}>
         {
           cars.map(car => (
               <div className='w-full h-full !flex items-center justify-center relative' key={car.id}>
