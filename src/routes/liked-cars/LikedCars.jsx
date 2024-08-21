@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import Header from "../../components/header/Header.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 
-const Liked = () => {
+const LikedCars = () => {
   const dispatch = useDispatch()
   const { likedCars } = useSelector((state) => state.like);
 
@@ -82,4 +82,4 @@ const Liked = () => {
       </div>
   )
 }
-export default Liked
+export default LikedCars

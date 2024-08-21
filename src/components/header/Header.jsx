@@ -22,7 +22,7 @@ const Header = () => {
     window.location.reload();
   };
 
-  const items = [
+  const items = data?.payload && data?.payload?.role === "admin" ? [
     {
       label: data?.payload ?
           <div className="bg-transparent flex items-center gap-2 text-[#596780]">
@@ -31,10 +31,10 @@ const Header = () => {
       key: "0"
     },
     {
-      label: data?.payload && data?.payload?.role === "admin" ? <div onClick={() => navigate("/dashboard")}
+      label: <div onClick={() => navigate("/dashboard")}
                   className="bg-transparent flex items-center gap-2 text-[#596780]">
         <span>Dashboard</span> <LuLayoutDashboard/>
-      </div> : <div className="!h-[1px]"></div>,
+      </div>,
       key: '1',
     },
     {
@@ -51,6 +51,30 @@ const Header = () => {
         <IoLogOutOutline/>
       </div>,
       key: '3',
+    }
+  ] : [
+    {
+      label: data?.payload ?
+          <div className="bg-transparent flex items-center gap-2 text-[#596780]">
+            <span>{data?.payload?.first_name}</span> <SlUser/>
+          </div> : <div className="bg-transparent flex items-center gap-2 text-[#596780]">User not registered</div>,
+      key: "0"
+    },
+
+    {
+      label: <div onClick={() => navigate("/auth/signin")}
+                  className="bg-transparent flex items-center gap-2 text-[#596780]">
+        <span>Sign in</span>
+        <IoLogInOutline/>
+      </div>,
+      key: '1',
+    },
+    {
+      label: <div onClick={logOutUser} className="bg-transparent flex items-center gap-2 text-[#596780]">
+        <span>Log Out</span>
+        <IoLogOutOutline/>
+      </div>,
+      key: '2',
     }
   ];
 
