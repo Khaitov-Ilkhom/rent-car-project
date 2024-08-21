@@ -2,6 +2,8 @@ import {Navigate, useRoutes} from "react-router-dom";
 import {SuspenseElement as Suspense} from "../utils/Index.jsx";
 import {lazy} from "react";
 import {useSelector} from "react-redux";
+import {useGetAllCarQuery} from "../redux/api/car-api.jsx";
+import {useGetProfileQuery} from "../redux/api/user-api.jsx";
 
 const Home = lazy(() => import("./home/Home.jsx"));
 const Auth = lazy(() => import("./auth/Auth.jsx"));
@@ -25,6 +27,7 @@ const NotFound = lazy(() => import("./not-found/NotFound.jsx"));
 
 const RouteController = () => {
   const {user} = useSelector(state => state.auth);
+  // const {data} = useGetProfileQuery();
   return useRoutes([
     {
       path: "",

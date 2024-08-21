@@ -17,7 +17,7 @@ const usersApi = api.injectEndpoints({
     deletedUser: build.mutation({
       query: (id) => ({
         url: `/users/${id}`,
-        method: "DELETED",
+        method: "DELETE",
       }),
       invalidatesTags: ["USER"]
     }),

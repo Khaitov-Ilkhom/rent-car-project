@@ -12,7 +12,6 @@ import {FaRegUserCircle} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {logOut} from "../../redux/slices/Auth-slice.jsx";
 
-
 const Header = () => {
   const navigate = useNavigate();
   const {data} = useGetProfileQuery()
