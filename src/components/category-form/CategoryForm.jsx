@@ -113,7 +113,7 @@ const CategoryForm = ({setIsModal, carData, setCarData}) => {
               uid: carData?.image,
               name: carData?.name,
             }] : null} listType="picture-card" maxCount={1} beforeUpload={() => false} onChange={handleUploadFile}
-                    onRemove={(data) => deletedFile(carData?.image)}>
+                    onRemove={() => deletedFile(carData?.image)}>
               <div>
                 <UploadOutlined/>
                 <div className="mt-2">Upload</div>

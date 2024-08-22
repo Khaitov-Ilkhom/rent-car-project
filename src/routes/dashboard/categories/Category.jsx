@@ -1,7 +1,4 @@
-import {
-  useDeletedCategoryMutation,
-  useGetCategoriesQuery
-} from "../../../redux/api/categories-api.jsx";
+import {useDeletedCategoryMutation, useGetCategoriesQuery} from "../../../redux/api/categories-api.jsx";
 import {Button, Image, message, Modal, Table} from "antd";
 import {useEffect, useState} from "react";
 import CategoryForm from "../../../components/category-form/CategoryForm.jsx";
@@ -42,7 +39,7 @@ const Category = () => {
       key: "image",
       dataIndex: "image",
       render: (image) => <Image.PreviewGroup>
-        <Image key={image} width={60} src={image}/>
+        <Image key={image} className="!w-[60px] !h-[40px] object-contain" src={image}/>
       </Image.PreviewGroup>,
     },
     {
