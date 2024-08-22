@@ -9,7 +9,7 @@ const Cars = ({ data, loading, title, link, slice, className}) => {
           <div>
             <div className="flex items-center justify-between">
               {title && <h2 className="text-3xl font-bold mb-5">{title}</h2>}
-              {link && <Link to={link} className="text-blue-600">View All</Link>}
+              {link && <Link to={link} className="text-gray-600">View All</Link>}
             </div>
             {loading ? (
                 <Loading />

@@ -151,7 +151,7 @@ const CarDetails = () => {
                   </div>
 
                   <button
-                      className="flex items-center justify-center rounded-[10px] bg-blue-600 px-8 py-4 text-base font-bold text-white">
+                      className="flex items-center justify-center rounded-[10px] bg-gray-600 px-8 py-4 text-base font-bold text-white">
                     Rent Now
                   </button>
                 </div>

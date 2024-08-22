@@ -5,7 +5,7 @@ import {addToLiked} from "../../redux/slices/LikeSlice.jsx";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 
 const RenderCard = ({car}) => {
-  const { likedCars } = useSelector((state) => state.like);
+  const {likedCars} = useSelector((state) => state.like);
   const dispatch = useDispatch();
 
   const isProductLiked = (carId) => {
@@ -69,7 +69,7 @@ const RenderCard = ({car}) => {
           </div>
           <Link
               to={`/car-details/${car._id}`}
-              className="mt-2 flex max-w-max rounded bg-blue-600 px-5 py-[10px] text-center text-base font-semibold leading-normal text-white"
+              className="mt-2 flex max-w-max rounded bg-gray-600 px-5 py-[10px] text-center text-base font-semibold leading-normal text-white"
           >
             Rent Now
           </Link>

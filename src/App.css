@@ -72,6 +72,9 @@
   background-color: transparent !important;
   box-shadow: none !important;
 }
+.hover\:border-\[\#1677FF\]:hover {
+  border-color: #556275 !important;
+}
 
 /* create form upload file style */
 .ant-upload-select {
@@ -107,7 +110,7 @@
   background-color: rgba(0, 0, 0, 0.75) !important;
 }
 
-
+/* modal btn */
 .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
   color: #556275;
   border-color: #556275;
@@ -120,4 +123,18 @@
 .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
   background-color: #ffffff !important;
   color: #556275 !important;
+}
+
+/* pagination */
+.ant-pagination .ant-pagination-item-active a  {
+  color: #556275;
+}
+.ant-pagination .ant-pagination-item-active:hover {
+  border-color: #556275 !important;
+}
+.ant-pagination .ant-pagination-item-active {
+  border-color: #2c333c;
+}
+.ant-pagination .ant-pagination-item a:hover {
+  color: #000000 !important;
 }

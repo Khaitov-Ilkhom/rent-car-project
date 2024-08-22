@@ -7,7 +7,7 @@ const Footer = () => {
           <div className="flex flex-col">
             <div className="flex items-start justify-between border-b-2 border-slate-300 pb-9">
               <div className="flex w-full max-w-[292px] flex-col items-start justify-between gap-4">
-                <span className="text-[32px] font-bold text-[#3563e9]">Top Cars</span>
+                <span className="text-[32px] font-bold text-gray-600">Top Cars</span>
                 <span className="text-base font-medium text-[#131313]">
                 Our vision is to provide convenience and help increase your sales
                 business.
