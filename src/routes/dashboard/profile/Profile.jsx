@@ -74,8 +74,9 @@ const Profile = () => {
         </div>
         <div className="w-full flex justify-around items-center gap-4">
           <div>
-            <p className="py-2"><b>Name:</b> {data?.payload.first_name} {data?.payload.last_name}</p>
-            <p className="capitalize"><b>Role:</b> {data?.payload.role}</p>
+            <p className="py-1"><b>Name:</b> {data?.payload.first_name} {data?.payload.last_name}</p>
+            <p className="capitalize py-2"><b>Role:</b> {data?.payload.role}</p>
+            <p><b>Balance: </b>${data?.payload?.balance}</p>
           </div>
           <div>
             <p className="py-2">

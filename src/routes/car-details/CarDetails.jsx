@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {useGetCarQuery} from "../../redux/api/car-api.jsx";
 import Header from "../../components/header/Header.jsx";
 import Footer from "../../components/footer/Footer.jsx";
-import {useGetCategoriesQuery} from "../../redux/api/categories.jsx";
+import {useGetCategoriesQuery} from "../../redux/api/categories-api.jsx";
 import {Carousel, Image} from "antd";
 import {useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";

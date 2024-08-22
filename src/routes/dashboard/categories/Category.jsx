@@ -1,12 +1,13 @@
 import {
   useDeletedCategoryMutation,
   useGetCategoriesQuery
-} from "../../../redux/api/categories.jsx";
+} from "../../../redux/api/categories-api.jsx";
 import {Button, Image, message, Modal, Table} from "antd";
 import {useEffect, useState} from "react";
 import CategoryForm from "../../../components/category-form/CategoryForm.jsx";
 
 const Category = () => {
+  const [carData, setCarData] = useState(null);
   const [isModal, setIsModal] = useState(false);
   const [modal, setModal] = useState(false);
   const [carId, setCarId] = useState(null);
@@ -48,7 +49,7 @@ const Category = () => {
       title: "Actions",
       key: "actions",
       render: (car) => <div className="flex items-center gap-2 ">
-        <Button>Edit</Button>
+        <Button onClick={() => setCarData(car)}>Edit</Button>
         <Button danger onClick={() => openModal(car)}>Delete</Button>
       </div>
     }
@@ -56,9 +57,11 @@ const Category = () => {
 
   const showModal = () => {
     setIsModal(true)
+    setCarData(null)
   }
   const handleCancel = () => {
     setIsModal(false);
+    setCarData(null);
   };
 
   // delete category
@@ -82,6 +85,7 @@ const Category = () => {
       message.error(deleteCar?.message);
     }
   }, [isSuccess, isError]);
+
   return (
       <div>
         <div className="w-full m-auto border-b">
@@ -94,13 +98,13 @@ const Category = () => {
         <Modal
             centered
             title="Create category"
-            open={isModal}
+            open={isModal || Boolean(carData)}
             onCancel={handleCancel}
             maskClosable={false}
             footer={false}
             forceRender={true}
         >
-          <CategoryForm setIsModal={setIsModal}/>
+          <CategoryForm carData={carData} setCarData={setCarData}  setIsModal={setIsModal} modal={modal}/>
         </Modal>
         <Modal
             centered

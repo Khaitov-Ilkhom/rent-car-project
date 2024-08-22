@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery } from "../../redux/api/categories.jsx";
+import { useGetCategoriesQuery } from "../../redux/api/categories-api.jsx";
 import { Container, Loading } from "../../utils/Index.jsx";
 import { Link } from "react-router-dom";
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Checkbox, Slider } from "antd";
 import { Loading } from "../../utils/Index.jsx";
 import { useSearchParams } from "react-router-dom";
-import { useGetCategoriesQuery } from "../../redux/api/categories.jsx";
+import { useGetCategoriesQuery } from "../../redux/api/categories-api.jsx";
 import Header from "../header/Header.jsx";
 
 const CategorySidebar = () => {

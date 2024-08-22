@@ -1,6 +1,6 @@
 import {Form, Input, Select} from "antd";
 import {useForm} from "antd/es/form/Form";
-import {useGetCategoriesQuery} from "../../redux/api/categories.jsx";
+import {useGetCategoriesQuery} from "../../redux/api/categories-api.jsx";
 
 const {TextArea} = Input;
 const {Option} = Select;
