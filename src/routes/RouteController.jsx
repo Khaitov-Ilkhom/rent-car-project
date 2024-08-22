@@ -24,6 +24,7 @@ const CarDetails = lazy(() => import("./car-details/CarDetails.jsx"));
 const NotFound = lazy(() => import("./not-found/NotFound.jsx"));
 const LikedCars = lazy(() => import("./liked-cars/LikedCars.jsx"));
 const Search = lazy(() => import("./search/Search.jsx"));
+const UserProfile = lazy(() => import("./user-profile/UserProfile.jsx"));
 
 const RouteController = () => {
   const {user} = useSelector(state => state.auth);
@@ -113,6 +114,10 @@ const RouteController = () => {
     {
       path: "search",
       element: <Suspense><Search/></Suspense>,
+    },
+    {
+      path: "user-profile",
+      element: <Suspense><UserProfile/></Suspense>,
     }
   ])
 }

@@ -78,7 +78,7 @@ const Header = () => {
       [
         {
           label: data?.payload ?
-              <div className="bg-transparent flex items-center gap-2 text-[#596780]">
+              <div onClick={() => navigate("/user-profile")} className="bg-transparent flex items-center gap-2 text-[#596780]">
                 <span>{data?.payload?.first_name}</span> <SlUser/>
               </div> : <div className="bg-transparent flex items-center gap-2 text-[#596780]">User not registered</div>,
           key: "0"

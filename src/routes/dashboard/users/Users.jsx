@@ -7,7 +7,7 @@ import * as userData from "antd";
 const Profile = () => {
   const {data} = useGetAllUsersQuery()
   const [promotedUser, {data: promoteData, isSuccess: promoteSuccess, isError: promoteError}] = usePromoteUserMutation()
-  const [deleteUser, {data: deleteData, isSuccess, isError}] = useDeletedUserMutation()
+  const [deleteUser, {data: deleteData, isSuccess, isError, error}] = useDeletedUserMutation()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   const [promUser, setPromUser] = useState(null);
@@ -44,9 +44,9 @@ const Profile = () => {
       message.success(deleteData?.message)
     }
     if (isError) {
-      message.error("Error deleting user");
+      message.error(error?.deleteData?.message || "Error deleting user");
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, error]);
   useEffect(() => {
     if (promoteSuccess) {
       message.success(promoteData?.message)
