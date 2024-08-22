@@ -2,7 +2,6 @@ import {useDeletedUserMutation, useGetAllUsersQuery, usePromoteUserMutation} fro
 import {Button, Image, message, Modal, Table} from "antd";
 import userAvatar from "../../../images/User-avatar.png"
 import {useEffect, useState} from "react";
-import * as userData from "antd";
 
 const Profile = () => {
   const {data} = useGetAllUsersQuery()
