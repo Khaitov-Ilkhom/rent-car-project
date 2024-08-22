@@ -77,9 +77,9 @@ const CarRent = () => {
     }
   }, [isSuccess, isError]);
   return (
-      <div className="">
+      <div className="p-6">
         <div className="w-full m-auto border-b">
-          <Button className="mb-2" onClick={showModal}>Create new car</Button>
+          <Button className="mb-2 text-white bg-gray-600 hover:!text-gray-600 hover:!bg-white !border-gray-600 transition duration-500" onClick={showModal}>Create new car</Button>
         </div>
         <div>
           <AllCarsTable/>
@@ -92,21 +92,19 @@ const CarRent = () => {
             <div className="text-end">
               {current > 0 && (
                   <Button
-                      style={{
-                        margin: '0 8px',
-                      }}
+                      className="text-gray-600 bg-white hover:!text-white hover:!bg-gray-600 !border-[#556275] transition duration-700 mx-[8px]"
                       onClick={() => prev()}
                   >
                     Previous
                   </Button>
               )}
               {current < steps.length - 1 && (
-                  <Button type="primary" onClick={() => next()}>
+                  <Button className="bg-[#556275] text-white hover:!bg-white !border-[#556275] hover:!text-[#556275] transition duration-200" onClick={() => next()}>
                     Next
                   </Button>
               )}
               {current === steps.length - 1 && (
-                  <Button type="primary" onClick={createdCar}>
+                  <Button className="bg-[#556275] text-white hover:!bg-white !border-[#556275] hover:!text-[#556275] transition duration-200" onClick={createdCar}>
                     Done
                   </Button>
               )}

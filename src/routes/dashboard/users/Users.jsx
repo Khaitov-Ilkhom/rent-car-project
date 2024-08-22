@@ -103,15 +103,15 @@ const Profile = () => {
       title: "Actions",
       key: "actions",
       render: (users) => <div className="flex items-center gap-2 ">
-        <Button disabled={users.role === "admin" || users.role === "owner"} type="primary" onClick={() => promoteUser(users)}>Promote</Button>
+        <Button disabled={users.role === "admin" || users.role === "owner"} className="!border-gray-300 hover:!text-gray-500" onClick={() => promoteUser(users)}>Promote</Button>
         <Button danger onClick={() => showModal(users)}>Delete</Button>
       </div>
     }
   ]
 
   return (
-      <div>
-        <div className="mt-4">
+      <div className="p-6">
+        <div className="">
           <Table pagination={{pageSize: 8}} columns={columns}
                  dataSource={data?.payload.map(users => ({key: users._id, ...users}))}/>
         </div>

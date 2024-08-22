@@ -79,7 +79,7 @@ const AllCarsTable = () => {
       title: "Actions",
       key: "actions",
       render: (car) => <div className="flex items-center gap-2 ">
-        <Button onClick={() => updateCar(car)}>Edit</Button>
+        <Button className="!border-gray-300 hover:!text-gray-500">Edit</Button>
         <Button danger onClick={() => showModal(car)}>Delete</Button>
       </div>
     }
@@ -87,7 +87,7 @@ const AllCarsTable = () => {
   return (
       <div>
         <div className="mt-4">
-          <Table pagination={{pageSize: 5}} columns={columns}
+          <Table pagination={{pageSize: 6}} columns={columns}
                  dataSource={data?.payload.map(car => ({key: car._id, ...car}))}/>
         </div>
         <Modal

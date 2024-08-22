@@ -46,7 +46,7 @@ const Category = () => {
       title: "Actions",
       key: "actions",
       render: (car) => <div className="flex items-center gap-2 ">
-        <Button onClick={() => setCarData(car)}>Edit</Button>
+        <Button className="!border-gray-300 hover:!text-gray-500" onClick={() => setCarData(car)}>Edit</Button>
         <Button danger onClick={() => openModal(car)}>Delete</Button>
       </div>
     }
@@ -84,12 +84,12 @@ const Category = () => {
   }, [isSuccess, isError]);
 
   return (
-      <div>
+      <div className="p-6">
         <div className="w-full m-auto border-b">
-          <Button className="mb-2" onClick={() => showModal()}>Create new category</Button>
+          <Button className="mb-2 text-white bg-gray-600 hover:!text-gray-600 hover:!bg-white !border-gray-600 transition duration-500" onClick={() => showModal()}>Create new category</Button>
         </div>
         <div className="mt-4">
-          <Table pagination={{pageSize: 4}} columns={columns}
+          <Table pagination={{pageSize: 6}} columns={columns}
                  dataSource={data?.payload.map(car => ({key: car._id, ...car}))}/>
         </div>
         <Modal

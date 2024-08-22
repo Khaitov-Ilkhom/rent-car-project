@@ -16,7 +16,7 @@ const Dashboard = () => {
         </div>
         <Layout className="min-h-screen">
           <SidebarHeader collapsed={collapsed} setCollapsed={setCollapsed}/>
-          <Content className="bg-white rounded-xl shadow-xl p-4 m-4 h-screen ">
+          <Content className="bg-white rounded-xl shadow-xl overflow-hidden m-4 h-screen ">
             <Outlet/>
           </Content>
         </Layout>
