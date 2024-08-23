@@ -128,12 +128,12 @@ const CategoryForm = ({setIsModal, carData, setCarData}) => {
           >
             {
               Boolean(carData?.name) ? <Button
-                      className="w-full bg-gray-500 text-white hover:!bg-white hover:!text-gray-500 hover:!border-gray-500"
+                      className="w-full bg-gray-500 text-white hover:!bg-white hover:!text-gray-500 hover:!border-gray-500 py-5"
                       htmlType="submit">
                     Update category
                   </Button> :
                   <Button
-                      className="w-full bg-gray-500 text-white hover:!bg-white hover:!text-gray-500 hover:!border-gray-500"
+                      className="w-full bg-gray-500 text-white hover:!bg-white hover:!text-gray-500 hover:!border-gray-500 py-5"
                       htmlType="submit">
                     Create new category
                   </Button>

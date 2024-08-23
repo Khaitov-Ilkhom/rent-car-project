@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useGetCarQuery} from "../../redux/api/car-api.jsx";
 import Header from "../../components/header/Header.jsx";
 import Footer from "../../components/footer/Footer.jsx";
@@ -11,6 +11,7 @@ import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 
 const CarDetails = () => {
   const {id} = useParams()
+  const navigate = useNavigate();
   const {data} = useGetCarQuery(id)
   const {categories} = useGetCategoriesQuery();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,9 +91,9 @@ const CarDetails = () => {
 
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between gap-4">
-                    <span className="text-base font-normal text-[#90a3bf]">
-                      Type Car
-                    </span>
+                    {/*<span className="text-base font-normal text-[#90a3bf]">*/}
+                    {/*  Type Car*/}
+                    {/*</span>*/}
                       <span className="text-base font-semibold capitalize text-[#596780]">
                       {categories?.payload?.length > 0 ? (
                           categories.payload.map((category) => {
@@ -150,7 +151,7 @@ const CarDetails = () => {
                   </span>
                   </div>
 
-                  <button
+                  <button onClick={() => navigate(`/create-order/${id}`)}
                       className="flex items-center justify-center rounded-[10px] bg-gray-600 px-8 py-4 text-base font-bold text-white">
                     Rent Now
                   </button>

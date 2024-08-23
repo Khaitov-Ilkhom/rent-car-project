@@ -14,7 +14,7 @@ const Dashboard = lazy(() => import("./dashboard/Dashboard.jsx"));
 const CarRent = lazy(() => import("./dashboard/car-rent/CarRent.jsx"));
 const Category = lazy(() => import("./dashboard/categories/Category.jsx"));
 const Liked = lazy(() => import("./dashboard/liked/Liked.jsx"));
-const Notification = lazy(() => import("./dashboard/notification/Notification.jsx"));
+const Notification = lazy(() => import("./dashboard/notification/Orders.jsx"));
 const Profile = lazy(() => import("./dashboard/profile/Profile.jsx"));
 const Setting = lazy(() => import("./dashboard/setting/Setting.jsx"));
 const Users = lazy(() => import("./dashboard/users/Users.jsx"));
@@ -25,6 +25,7 @@ const NotFound = lazy(() => import("./not-found/NotFound.jsx"));
 const LikedCars = lazy(() => import("./liked-cars/LikedCars.jsx"));
 const Search = lazy(() => import("./search/Search.jsx"));
 const UserProfile = lazy(() => import("./user-profile/UserProfile.jsx"));
+const CreateOrder = lazy(() => import("./create-order/CreateOrder.jsx"));
 
 const RouteController = () => {
   const {user} = useSelector(state => state.auth);
@@ -80,7 +81,7 @@ const RouteController = () => {
               element: <Suspense><Liked/></Suspense>,
             },
             {
-              path: "notification",
+              path: "orders",
               element: <Suspense><Notification/></Suspense>,
             },
             {
@@ -104,6 +105,18 @@ const RouteController = () => {
       element: <Suspense><LikedCars/></Suspense>,
     },
     {
+      path: "search",
+      element: <Suspense><Search/></Suspense>,
+    },
+    {
+      path: "user-profile",
+      element: <Suspense><UserProfile/></Suspense>,
+    },
+    {
+      path: "create-order/:id",
+      element: <Suspense><CreateOrder/></Suspense>,
+    },
+    {
       path: "notfound",
       element: <Suspense><NotFound/></Suspense>
     },
@@ -111,14 +124,6 @@ const RouteController = () => {
       path: "*",
       element: <Suspense><Navigate to="notfound"/></Suspense>
     },
-    {
-      path: "search",
-      element: <Suspense><Search/></Suspense>,
-    },
-    {
-      path: "user-profile",
-      element: <Suspense><UserProfile/></Suspense>,
-    }
   ])
 }
 export default RouteController

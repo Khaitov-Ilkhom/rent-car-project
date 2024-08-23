@@ -1,10 +1,12 @@
 import "./Sidebar.css"
 import {Layout, Menu} from 'antd';
 import {NavLink} from "react-router-dom";
-import { IoHome, IoPersonSharp, IoNotifications, IoSettings } from "react-icons/io5";
+import { IoHome, IoPersonSharp, IoSettings } from "react-icons/io5";
 import { FaCar, FaHeart } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import { PiUsersThreeBold } from "react-icons/pi";
+import { LiaSalesforce } from "react-icons/lia";
+
 
 
 
@@ -46,13 +48,13 @@ const Sidebar = ({collapsed}) => {
               },
               {
                 key: '6',
-                icon: <FaHeart size={22}/>,
-                label: <NavLink to="/dashboard/liked">Liked</NavLink>,
+                icon: <LiaSalesforce size={22}/>,
+                label: <NavLink to="/dashboard/orders">Orders</NavLink>,
               },
               {
                 key: '7',
-                icon: <IoNotifications size={22}/>,
-                label: <NavLink to="/dashboard/notification">Notification</NavLink>,
+                icon: <FaHeart size={22}/>,
+                label: <NavLink to="/dashboard/liked">Liked</NavLink>,
               },
               {
                 key: '8',
