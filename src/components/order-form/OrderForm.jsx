@@ -13,6 +13,8 @@ const OrderForm = ({oneDayPrice, carId}) => {
   const [dateTo, setDateTo] = useState(null);
   const [dateFrom, setDateFrom] = useState(null);
 
+  console.log(dateFrom)
+
   const [createdOrder, {data, isSuccess, isError, error}] = useCreateOrderMutation();
   const {data: userData} = useGetProfileQuery()
 

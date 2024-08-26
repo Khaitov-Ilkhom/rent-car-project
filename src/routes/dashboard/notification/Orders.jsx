@@ -1,8 +1,14 @@
-import {useGetAllOrdersQuery} from "../../../redux/api/orders-api.jsx";
-import {Button, Image, Table} from "antd";
+import {useDeleteOrderMutation, useGetAllOrdersQuery} from "../../../redux/api/orders-api.jsx";
+import {Button, Image, message, Table} from "antd";
+import {useEffect} from "react";
 
 const Orders = () => {
   const {data} = useGetAllOrdersQuery()
+  const [deletedOrder, {data: deleteData, isSuccess, isError, error}] = useDeleteOrderMutation()
+  const deleteOrder = (order) => {
+    deletedOrder(order._id)
+  }
+
   const columns = [
     {
       title: "No",
@@ -50,12 +56,21 @@ const Orders = () => {
     {
       title: "Actions",
       key: "actions",
-      render: () => <div className="flex items-center gap-2 ">
+      render: (order) => <div className="flex items-center gap-2 ">
         <Button className="!border-gray-300 hover:!text-gray-500">Edit</Button>
-        <Button danger>Delete</Button>
+        <Button onClick={() => deleteOrder(order)} danger>Delete</Button>
       </div>
     }
   ]
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success(deleteData?.message || "Deleted order successfully.")
+    }
+    if (isError) {
+      message.error(error?.deleteData?.message || "Error deleting user");
+    }
+  }, [isSuccess, isError, error, deleteData]);
   return (
       <div className="p-6">
         <div>

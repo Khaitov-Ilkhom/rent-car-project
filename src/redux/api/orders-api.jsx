@@ -15,8 +15,15 @@ const ordersApi = api.injectEndpoints({
         body
       }),
       invalidatesTags: ["ORDERS"]
+    }),
+    deleteOrder: build.mutation({
+      query: (id) => ({
+        url: `/orders/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["ORDERS"]
     })
   })
 })
 
-export const {useGetAllOrdersQuery, useCreateOrderMutation} = ordersApi
+export const {useGetAllOrdersQuery, useCreateOrderMutation, useDeleteOrderMutation} = ordersApi
