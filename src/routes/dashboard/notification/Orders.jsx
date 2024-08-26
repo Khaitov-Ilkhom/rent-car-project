@@ -37,13 +37,13 @@ const Orders = () => {
       title: "From date",
       key: "from_date",
       dataIndex: "fromDate",
-      render: (text) => <span className="capitalize">{text}</span>,
+      render: (text) => <span>{new Date(text).toLocaleDateString('uz-UZ', {timeZone: 'Asia/Tashkent'})}</span>,
     },
     {
       title: "To date",
       key: "to_date",
       dataIndex: "toDate",
-      render: (text) => <span className="capitalize">{text}</span>,
+      render: (text) => <span>{new Date(text).toLocaleDateString('uz-UZ', {timeZone: 'Asia/Tashkent'})}</span>,
     },
     {
       title: "Car image",
