@@ -22,7 +22,7 @@ const OrderForm = ({oneDayPrice, carId}) => {
       user_id: userData?.payload?._id,
       car_id: carId,
       total_price: total,
-      payment_status: values.payment_status,
+      payment_status: "paid",
       payment_method: values.payment_method,
       fromDate: dateFrom,
       toDate: dateTo,
@@ -73,20 +73,6 @@ const OrderForm = ({oneDayPrice, carId}) => {
           >
             <RangePicker className="w-full py-[6px] border border-slate-400 hover:!border-slate-400"
                          onChange={getDate}/>
-          </Form.Item>
-
-          <Form.Item
-              className="!mb-4"
-              name="payment_status"
-              label="Payment Status"
-              rules={[{required: true, message: 'Please select the payment status!'}]}
-          >
-            <Select
-                className="text-[16px] py-[16px] border rounded border-slate-400 hover:border-slate-500 w-full bg-white"
-                placeholder="Select payment status">
-              <Option value="paid">Paid</Option>
-              <Option value="unpaid">Unpaid</Option>
-            </Select>
           </Form.Item>
 
           <Form.Item
